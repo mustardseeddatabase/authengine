@@ -1,0 +1,10 @@
+<h1>New role</h1>
+
+<%= error_messages_for :role %>
+
+<% form_for(@role) do |f| %>
+<table>
+	<tr><td>Name:</td><td colspan="3"><%= f.text_field :name %></td></tr>
+</table>
+<%= f.submit "Create" %>
+<% end %>

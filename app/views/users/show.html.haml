@@ -1,0 +1,12 @@
+%h2
+  User:
+  = @user.firstName+" "+@user.lastName
+%p
+  Login name:
+  = @user.login
+%p
+  email:
+  = @user.email
+%p
+  Joined on:
+  = @user.created_at.to_s(:long)

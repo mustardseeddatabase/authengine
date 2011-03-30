@@ -1,0 +1,23 @@
+Add authengine to your Gemfile:
+      gem 'authengine'
+      gem 'haml'
+
+And run:
+      bundle install
+
+In config/application.rb, configure the generator for haml by including:
+    config.generators do |g|
+    # Configure haml to be the default templating engine for generators
+      g.template_engine :haml
+    end
+
+Then copy the authengine migrations and initializer to your application
+and modify your application.html.rb to use the authengine with:
+      rails generate authengine
+
+The database is initialized with the default username: admin and password: password
+be sure to delete this user once the real administrator has been created.
+
+When logged in, the preconfigured admin user is assigned to the 'developer' role,
+which grants permissions to all controllers and actions. Additional users, roles and
+permissions may then be granted.
