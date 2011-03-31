@@ -1,7 +1,7 @@
 # This controller handles the login/logout function of the site.
 require "date"
 
-class SessionsController < ApplicationController
+class Authengine::SessionsController < ApplicationController
   layout 'application'
 
   skip_before_filter :load_actions_list, :check_permissions, :log_useractions, :log_referer, :only => [:new, :create, :destroy]
@@ -26,7 +26,6 @@ class SessionsController < ApplicationController
 
 protected
 
-  # Updated 2/20/08
   def password_authentication(login, password)
     user = User.authenticate(login, password)
     if user == nil
