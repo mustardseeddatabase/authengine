@@ -2,27 +2,29 @@
 
 %h1 Create a new user account:
 
-=form_for @user do |f|
-  %p
-    %label{:for=>"firstName"}
-    First Name
-  = f.text_field :firstName
+=form_for [:authengine, @user] do |f|
+  %table
+    %tr
+      %td
+        %label{:for=>"firstName"} First Name
+      %td= f.text_field :firstName
 
-  %p
-    %label{:for=>"lastName"}
-    Last Name
-  = f.text_field :lastName
+    %tr
+      %td
+        %label{:for=>"lastName"} Last Name
+      %td= f.text_field :lastName
 
-  %p
-    %label{:for=>"email"}
-    Email
-  = f.text_field :email
-  -#= f.fields_for :roles_users do |role_form|
-    -#%p=label for="role_id"
-      -#Database access role
-      -#%br/
-      -#= role_form.collection_select(:role_id, @roles, :id, :name)%>  
-  %p= f.submit 'Add User'
-%p= link_to("Back", users_path)
+    %tr
+      %td
+        %label{:for=>"email"} Email
+      %td= f.text_field :email
+
+    %tr
+      %td
+        %label{:for => "role_id"} Database access role
+      %td
+        = f.fields_for :roles_users do |role_form|
+          = role_form.collection_select(:role_id, @roles, :id, :name)
+  = submit_or_return_to(authengine_users_path)
 %script{:type=>'text/javascript'}
-  document.getElementById('first_name').focus()
+  document.getElementById('user_firstName').focus()

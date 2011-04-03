@@ -91,9 +91,8 @@ class User < ActiveRecord::Base
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  # Updated 2/20/08
   def self.authenticate(login, password)
-    u = find :first, :conditions => ['login = ?', login] # need to get the salt
+    u = find :first, :conditions => ['login = ?', login]
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -134,6 +133,12 @@ class User < ActiveRecord::Base
 
   def recently_reset_password?
     @reset_password
+  end
+
+  def forget_me
+    self.remember_token_expires_at = nil
+    self.remember_token            = nil
+    save(:validate => false)
   end
 
   def has_role?(name)

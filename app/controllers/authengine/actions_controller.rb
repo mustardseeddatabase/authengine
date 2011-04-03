@@ -1,4 +1,6 @@
-class ActionsController < ApplicationController
+class Authengine::ActionsController < ApplicationController
+  layout 'authengine/layouts/authengine'
+
   def index
     Controller.update_table # make sure the actions table includes all current controllers/actions
     @actions = Action.all(:include=>:controller).sort
@@ -9,7 +11,7 @@ class ActionsController < ApplicationController
 
   def update
     ActionRole.update_all(params)
-    redirect_to (actions_url)
+    redirect_to (authengine_actions_url)
   end
 
 end

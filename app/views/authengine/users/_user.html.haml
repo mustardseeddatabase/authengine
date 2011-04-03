@@ -5,14 +5,14 @@
   %td
     - unless user == current_user
       - if user.enabled
-        = link_to('disable', disable_user_path(user.id), :method => :put)
+        = link_to('disable', disable_authengine_user_path(user.id), :method => :put)
       - else
-        = link_to('enable', enable_user_path(user.id), :method => :put)
-  %td= link_to "show", user
+        = link_to('enable', enable_authengine_user_path(user.id), :method => :put)
+  %td= link_to "show", authengine_user_path(user)
   %td
     - unless user == current_user
-      = link_to "delete", user, :confirm => "are you sure you want to delete #{user.first_last_name} ?", :method => :delete
+      = link_to "delete", [:authengine, user], :confirm => "are you sure you want to delete #{user.first_last_name} ?", :method => :delete
   %td
     - unless user == current_user
-      = link_to 'edit roles', user_roles_path(user)
-  %td= link_to 'edit profile', edit_user_path(user)
+      = link_to 'edit roles', authengine_user_roles_path(user)
+  %td= link_to 'edit profile', edit_authengine_user_path(user)

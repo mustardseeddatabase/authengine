@@ -1,12 +1,19 @@
 %h2
-  User:
-  = @user.firstName+" "+@user.lastName
-%p
-  Login name:
-  = @user.login
-%p
-  email:
-  = @user.email
-%p
-  Joined on:
-  = @user.created_at.to_s(:long)
+%table
+  %tr
+    %td User:
+    %td= @user.firstName+" "+@user.lastName
+  %tr
+    %td Login name:
+    %td= @user.login
+  %tr
+    %td email:
+    %td= @user.email
+  %tr
+    %td Joined on:
+    %td= @user.created_at.to_s(:long)
+  %tr
+    %td Role(s):
+    %td= @user.roles.map(&:name).join(", ")
+%br/
+= link_to "Back", :back

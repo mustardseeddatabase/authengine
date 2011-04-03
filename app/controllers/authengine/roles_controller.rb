@@ -1,5 +1,5 @@
-class RolesController < ApplicationController
-  layout 'application'
+class Authengine::RolesController < ApplicationController
+  layout 'authengine/layouts/authengine'
 
   def index
     @all_roles = Role.find(:all, :order=>:name)
@@ -18,16 +18,11 @@ class RolesController < ApplicationController
 
     @role = Role.find(params[:id])
 
-      respond_to do |format|
-        if @role.update_attributes(params[:role])
-          format.html {
-            @all_roles = Role.find(:all)
-            redirect_to roles_path
-           }
-          format.xml  { head :ok }
-        else
-          render :action => "edit"
-        end
+      if @role.update_attributes(params[:role])
+          @all_roles = Role.find(:all)
+          redirect_to authengine_roles_path
+      else
+        render :action => "edit"
       end
 
     else
@@ -36,7 +31,7 @@ class RolesController < ApplicationController
       unless @user.has_role?(@role.name)
       @user.roles << @role
       end
-      redirect_to user_roles_path(@user)
+      redirect_to authengine_user_roles_path(@user)
     end
 
   end
@@ -47,13 +42,13 @@ class RolesController < ApplicationController
     if params[:user_id].nil? then
       @role.destroy
       @all_roles = Role.find(:all)
-      redirect_to roles_path
+      redirect_to authengine_roles_path
     else
       @user = User.find(params[:user_id])
       if @user.has_role?(@role.name)
         @user.roles.delete(@role)
       end
-      redirect_to user_roles_path(@user)
+      redirect_to authengine_user_roles_path(@user)
    end
   end
 
@@ -72,10 +67,6 @@ class RolesController < ApplicationController
     else
       render :action => "new"
     end
-  end
-
-  def edit
-    @role = Role.find(params[:id])
   end
 
 end

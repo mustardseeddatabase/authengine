@@ -24,10 +24,15 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency 'rspec', '>= 2.0.0'
-  s.add_development_dependency 'rails', '3.0.4'
-  s.add_development_dependency 'capybara', '>= 0.4.0'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'rspec-rails', ">= 2.0.0"
-  s.add_development_dependency 'flexmock'
+  # one would think that these were development dependencies,
+  # but they are only installed when calling bundle from the
+  # host application if they are runtime dependencies! (bug?
+  # or misunderstanding?)
+  s.add_dependency 'rspec', '>= 2.0.0'
+  s.add_dependency 'rails', '>=3.0.0'
+  s.add_dependency 'capybara', '>= 0.4.0'
+  s.add_dependency 'sqlite3'
+  s.add_dependency 'rspec-rails', ">= 2.0.0"
+  s.add_dependency 'flexmock'
+  s.add_dependency 'faker'
 end

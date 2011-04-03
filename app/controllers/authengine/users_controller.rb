@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  layout 'application'
+class Authengine::UsersController < ApplicationController
+  layout 'authengine/layouts/authengine'
   #before_filter :not_logged_in_required, :only => [:new, :create]
   #before_filter :login_required, :only => [:show, :edit, :update]
   #before_filter :check_administrator_role, :only => [:index, :destroy, :enable]
@@ -25,8 +25,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    #@user.roles_users.build
-    #@roles = Role.all
+    @user.roles_users.build
+    @roles = Role.all
   end
 
 # users may only be created by the administrator from the index page
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     cookies.delete :auth_token
     @user = User.new(params[:user])
     @user.save!
-    redirect_to users_path
+    redirect_to authengine_users_path
   rescue ActiveRecord::RecordInvalid
     flash[:error] = "There was a problem creating the user account."
     @roles=Role.all
@@ -63,10 +63,10 @@ class UsersController < ApplicationController
     redirect_to root_path
   rescue User::ArgumentError
     flash[:notice] = 'Activation code not found. Please ask the database administrator to create an account for you.'
-    redirect_to new_user_path
+    redirect_to new_authengine_user_path
   rescue User::ActivationCodeNotFound
     flash[:notice] = 'Activation code not found. Please ask the database administrator to create an account for you.'
-    redirect_to new_user_path
+    redirect_to new_authengine_user_path
   rescue User::AlreadyActivated
     flash[:notice] = 'Your account has already been activated. You can log in below.'
     redirect_to login_path
@@ -77,10 +77,8 @@ class UsersController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_attributes(params[:user])
       flash[:notice] = "Your profile has been updated"
-      redirect_to user_path(@user)
-      #redirect_to :controller=>session[:referer][:controller], :action=>session[:referer][:action]
+      redirect_to authengine_user_path(@user)
     else
-      #render :action => 'edit_self'
       render :action => 'edit'
     end
   end
@@ -92,7 +90,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     elsif @user.is_advisor? && @user.update_attributes(params[:advisor])
       flash[:notice] = "User updated"
-      redirect_to user_path(@user)
+      redirect_to authengine_user_path(@user)
     else
       render :action => 'edit'
     end
@@ -101,7 +99,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_path
+    redirect_to authengine_users_path
   end
 
   def disable
@@ -109,7 +107,7 @@ class UsersController < ApplicationController
     unless @user.update_attribute(:enabled, false)
       flash[:error] = "There was a problem disabling this user."
     end
-    redirect_to users_path
+    redirect_to authengine_users_path
   end
 
   def enable
@@ -117,7 +115,7 @@ class UsersController < ApplicationController
     unless @user.update_attribute(:enabled, true)
       flash[:error] = "There was a problem enabling this user."
     end
-    redirect_to users_path
+    redirect_to authengine_users_path
   end
 
   def signup

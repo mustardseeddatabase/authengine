@@ -1,4 +1,5 @@
-class ActionRolesController < ApplicationController
+class Authengine::ActionRolesController < ApplicationController
+  layout 'authengine/layouts/authengine'
 
   def update_all
     aa = ActionRole.all.group_by(&:role_id).inject({}){|hash,a| hash[a[0]]=a[1].collect(&:action_id); hash}
@@ -13,7 +14,7 @@ class ActionRolesController < ApplicationController
       end
     end
 
-    redirect_to actions_url
+    redirect_to authengine_actions_url
   end
 
 end

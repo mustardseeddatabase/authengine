@@ -34,7 +34,7 @@ module AuthorizedSystem
            render :text=>"<div style='color:red'>Access permissions have not been configured for this information. Sorry.</div><div>Controller:#{controller}, Action:#{action}</div", :status=>404
          else
            flash.now[:error]= "Access permission has not been configured for the page you requested. Sorry.<br/>(controller: #{controller}, action: #{action})"
-           if request.env["HTTP_REFERER"].nil? then redirect_to 'home' else redirect_to :back end
+           if request.env["HTTP_REFERER"].nil? then redirect_to home_path else redirect_to :back end
          end
          return
      end

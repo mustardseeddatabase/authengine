@@ -1,4 +1,6 @@
-class UseractionsController < ApplicationController
+class Authengine::UseractionsController < ApplicationController
+  layout 'authengine/layouts/authengine'
+  
   def show
     eval("@useractions = Useraction#{params[:actionlog_id].to_i}.all.map{|u| u.becomes(Useraction)}")
     @date = Useraction.date_of_index(params[:actionlog_id].to_i)
