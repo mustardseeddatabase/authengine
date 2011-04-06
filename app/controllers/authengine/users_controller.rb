@@ -1,3 +1,8 @@
+# Besides the ususal REST actions, this controller contains show_self,
+# edit_self and update_self actions.
+# This permits access to be explicitly controlled via the
+# check_permissions filter, distinguishing between actions on one's own
+# model vs. actions on other users' models.
 class Authengine::UsersController < ApplicationController
   layout 'authengine/layouts/authengine'
   #before_filter :not_logged_in_required, :only => [:new, :create]
@@ -25,7 +30,7 @@ class Authengine::UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.roles_users.build
+    @user.user_roles.build
     @roles = Role.all
   end
 
@@ -72,7 +77,6 @@ class Authengine::UsersController < ApplicationController
     redirect_to login_path
   end
 
-
   def update_self
     @user = User.find(current_user.id)
     if @user.update_attributes(params[:user])
@@ -85,12 +89,9 @@ class Authengine::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if !@user.is_advisor? && @user.update_attributes(params[:user])
+    if @user.update_attributes(params[:user])
       flash[:notice] = "User updated"
-      redirect_to user_path(@user)
-    elsif @user.is_advisor? && @user.update_attributes(params[:advisor])
-      flash[:notice] = "User updated"
-      redirect_to authengine_user_path(@user)
+      redirect_to authengine_users_path
     else
       render :action => 'edit'
     end

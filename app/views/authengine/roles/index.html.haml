@@ -1,0 +1,9 @@
+%h1 Edit roles
+%table{:cellspacing =>'0', :cellpadding => '4'}
+  %tr
+    %th Role
+  - for role in @all_roles
+    %tr
+      %td= role.name
+
+= link_to 'Add new role', :controller=>:roles, :action=>:new

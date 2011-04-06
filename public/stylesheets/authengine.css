@@ -1,0 +1,9 @@
+#authengine_logout { 
+  position : absolute;
+  padding-left : 700px;
+  padding-top : 20px;
+}
+
+#admin_logout > a{
+  color : white
+}

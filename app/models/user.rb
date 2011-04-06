@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40, :on => :update
   validates_uniqueness_of   :login, :case_sensitive => false, :on => :update
 
-  has_many :roles_users, :dependent=>:delete_all
-  accepts_nested_attributes_for :roles_users, :allow_destroy=>true
-  has_many :roles, :through=>:roles_users
+  has_many :user_roles, :dependent=>:delete_all
+  accepts_nested_attributes_for :user_roles
+  has_many :roles, :through=>:user_roles
 
   has_many :useractions, :dependent=>:delete_all
   has_many :actions, :through=>:useractions
@@ -32,12 +32,10 @@ class User < ActiveRecord::Base
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  # ordinarily we would not allow the user to have access to :roles_users and :roles_users_attributes
-  # but since only the administrator can add users, this is not a problem here.
   # If the ability to add users was extended, may wish to change the attr_accessible to make sure a user cannot assign
   # themselves to a higher-privileged role
   # TODO in this application, users are trusted, but see how this should be implemented if users are not trusted
-  attr_accessible :login, :email, :password, :password_confirmation, :firstName, :lastName, :roles_users, :roles_users_attributes
+  attr_accessible :login, :email, :password, :password_confirmation, :firstName, :lastName, :user_roles_attributes
 
   class PermissionsNotConfigured < StandardError
     attr_reader :message
@@ -54,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def first_last_name
-    self.firstName+' '+self.lastName
+    firstName+' '+lastName
   end
 
 

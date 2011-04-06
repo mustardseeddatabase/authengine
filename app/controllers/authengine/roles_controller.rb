@@ -3,12 +3,6 @@ class Authengine::RolesController < ApplicationController
 
   def index
     @all_roles = Role.find(:all, :order=>:name)
-    if params[:user_id].nil?
-      render :template=>"roles/index"
-    else
-      @user = User.find(params[:user_id])
-      render :template=>"roles/user_roles"
-    end
   end
 
 
@@ -63,7 +57,7 @@ class Authengine::RolesController < ApplicationController
     if @role.save
       flash[:notice] = 'role was successfully created.'
       @all_roles = Role.find(:all)
-      render :template=>"roles/index"
+      render :template=>"authengine/roles/index"
     else
       render :action => "new"
     end

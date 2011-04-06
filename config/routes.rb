@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :roles
     resources :users do
       resource :account
-      resources :roles
+      resources :user_roles
 
       member do
         put 'enable'

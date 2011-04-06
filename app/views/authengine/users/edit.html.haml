@@ -4,7 +4,7 @@
     - @user.errors.full_messages.each do |msg|
       %li=msg 
 
-- form_for @user, :url => requested_user_or_self, :html => { :method => :put } do |f|
+= form_for @user, :url => requested_user_or_self, :html => { :method => :put } do |f|
   %p 
     First Name:
     %br/
@@ -18,7 +18,7 @@
     %br/
     = f.text_field :email, :size => 60
 
-  = submit_tag 'Save'
+  = submit_or_return_to authengine_users_path
 
 %script{:type=>'text/javascript'}
   document.getElementById('user_email').focus()
