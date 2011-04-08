@@ -6,7 +6,7 @@ class CreateAuthengineTables < ActiveRecord::Migration
 
   def self.down
     drop_table :useractions
-    drop_table :roles_users
+    drop_table :user_roles
     drop_table :roles
     drop_table :controllers
     drop_table :action_roles
