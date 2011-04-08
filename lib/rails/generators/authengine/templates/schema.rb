@@ -1,41 +1,49 @@
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20110403132035) do
+
+  create_table "action_roles", :force => true do |t|
+    t.integer  "role_id",    :limit => 8
+    t.integer  "action_id",  :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "actions", :force => true do |t|
+    t.string   "action_name"
+    t.integer  "controller_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+
+  create_table "controllers", :force => true do |t|
+    t.string   "controller_name"
+    t.datetime "last_modified"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "short_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "role_id",    :limit => 8, :null => false
+    t.integer  "user_id",    :limit => 8, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "useractions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "action_id"
     t.string   "type"
     t.text     "params"
-    t.timestamps
-  end
-
-  create_table "roles_users", :force => true do |t|
-    t.integer  "role_id",    :limit => 8, :null => false
-    t.integer  "user_id",    :limit => 8, :null => false
-    t.timestamps
-  end
-
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.string   "short_name"
-    t.timestamps
-  end
-
-  create_table "controllers", :force => true do |t|
-    t.string   "controller_name"
-    t.datetime "last_modified"
-    t.timestamps
-  end
-
-  create_table "action_roles", :force => true do |t|
-    t.integer  "role_id",    :limit => 8
-    t.integer  "action_id",  :limit => 8
-    t.timestamps
-  end
-
-  create_table "actions", :force => true do |t|
-    t.string   "action_name"
-    t.integer  "controller_id"
-    t.timestamps
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -53,9 +61,9 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string   "lastName"
     t.string   "type"
     t.string   "status"
-    t.timestamps
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  # add_index ?
-
 end
+
