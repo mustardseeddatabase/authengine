@@ -47,6 +47,23 @@ When a user is logged in with a role that matches (case insensitive) 'admin'
 (e.g. Administrator, foo_admin), they will be able to see the link to the
 administration portal, which is a menu of links to other administration pages.
 
+Application Name
+The name of the application is used in some views, set the constant APPLICATION_NAME
+to your own application's name.
+
+Privacy Policy
+If you wish to have new users read and agree to a privacy policy, then the policy
+should be included in app/views/authengine/users/_privacy_policy.html.haml of
+your application. A template is copied into this directory when the authengine
+generator is run. Delete this template if you do not want the user to see it.
+
+Testing
+In the head section of your application's application.html.haml layout file, include
+               - content_for :head
+This will include a javascript snippet that facilitates integration testing with
+cucumber/capybara. The script 'bypasses' any js calls to alert or confirm.
+
 TODO
 describe feature testing, rspec testing
 describe application_controller before_filter
+copy message_block images in generator

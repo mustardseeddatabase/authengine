@@ -11,7 +11,6 @@ class Authengine::AccountsController < ApplicationController
     # self.current_user = User.find_and_activate!(params[:id])
     logger.info "accounts show"
     @user = User.find_with_activation_code(params[:activation_code])
-    flash[:notice] = "Your account has been activated! You can now login."
     session[:activation_code] = params[:activation_code]
     redirect_to :controller=>:users, :action=>:signup, :id=>@user.id
   rescue User::ArgumentError

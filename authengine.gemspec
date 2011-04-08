@@ -31,8 +31,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'rspec', '>= 2.0.0'
   s.add_dependency 'rails', '>=3.0.0'
   s.add_dependency 'capybara', '>= 0.4.0'
-  s.add_dependency 'sqlite3'
   s.add_dependency 'rspec-rails', ">= 2.0.0"
   s.add_dependency 'flexmock'
   s.add_dependency 'faker'
+  s.add_dependency 'message_block'
 end

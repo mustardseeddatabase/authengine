@@ -62,19 +62,19 @@ class User < ActiveRecord::Base
   #  +User::ActivationCodeNotFound+ if there is no user with the corresponding activation code
   #  +User::AlreadyActivated+ if the user with the corresponding activation code has already activated their account
   def self.find_and_activate!(activation_code)
-  raise ArgumentError if activation_code.nil?
-    user = find_by_activation_code(activation_code)
-  raise ActivationCodeNotFound if !user
-  raise AlreadyActivated.new(user) if user.active?
-    user.send(:activate!)
-    user
+    raise ArgumentError if activation_code.nil?
+      user = find_by_activation_code(activation_code)
+    raise ActivationCodeNotFound if !user
+    raise AlreadyActivated.new(user) if user.active?
+      user.send(:activate!)
+      user
   end
 
   def self.find_with_activation_code(activation_code)
-  raise ArgumentError if activation_code.nil?
-    user = find_by_activation_code(activation_code)
-  raise ActivationCodeNotFound if !user
-  raise AlreadyActivated.new(user) if user.active?
+    raise ArgumentError if activation_code.nil?
+      user = find_by_activation_code(activation_code)
+    raise ActivationCodeNotFound if !user
+    raise AlreadyActivated.new(user) if user.active?
     user
   end
 

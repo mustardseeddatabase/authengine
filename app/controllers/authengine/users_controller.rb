@@ -64,8 +64,12 @@ class Authengine::UsersController < ApplicationController
   def activate
     # TODO must remember to reset the session[:activation_code]
     self.current_user = User.find_and_activate!(params[:activation_code])
-    @current_user.update_attributes(params[:user])
-    redirect_to root_path
+    if @current_user.update_attributes(params[:user])
+      redirect_to root_path
+    else
+      flash[:warn] = @current_user.errors.full_messages
+      redirect_to signup_authengine_user_path(@current_user)
+    end
   rescue User::ArgumentError
     flash[:notice] = 'Activation code not found. Please ask the database administrator to create an account for you.'
     redirect_to new_authengine_user_path
@@ -81,8 +85,9 @@ class Authengine::UsersController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update_attributes(params[:user])
       flash[:notice] = "Your profile has been updated"
-      redirect_to authengine_user_path(@user)
+      redirect_to authengine_users_path
     else
+      flash[:notice] = @user.errors.full_messages
       render :action => 'edit'
     end
   end

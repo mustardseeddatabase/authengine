@@ -1,20 +1,20 @@
-class UserMailer < ActionMailer::Base
+class Authengine::UserMailer < ActionMailer::Base
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'  
-    @url         = "http://#{SITE_URL}/activate/#{user.activation_code}"  
+    @url         = "http://#{SITE_URL}/authengine/activate/#{user.activation_code}"  
   end
 
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    @url  = "http://#{SITE_URL}/login"
+    @url  = "http://#{SITE_URL}/authengine/login"
   end
 
   def forgot_password(user)
     setup_email(user)
     @subject    += 'You have requested to change your password'
-    @url  = "http://#{SITE_URL}/reset_password/#{user.password_reset_code}"
+    @url  = "http://#{SITE_URL}/authengine/reset_password/#{user.password_reset_code}"
   end
 
   def reset_password(user)

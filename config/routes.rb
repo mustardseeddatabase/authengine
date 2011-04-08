@@ -29,8 +29,8 @@ Rails.application.routes.draw do
     end
 
     match '/admin' => "admin#show"
+    match '/activate(/:activation_code)' => "accounts#show", :as => :activate, :via => :get # actually activation_code is always required, but handling it as optional permits its absence to be communicated to the user as a flash message
   end
-  match '/activate(/:activation_code)' => "accounts#show", :as => :activate, :via => :get # actually activation_code is always required, but handling it as optional permits its absence to be communicated to the user as a flash message
   match '/login' => "authengine/sessions#new"
   match '/logout' => "authengine/sessions#destroy"
 
