@@ -23,7 +23,8 @@ module Authengine
 
     # serve static assets directly from the engine
     initializer "static assets" do |app|
-      app.middleware.use ::ActionDispatch::Static, "#{root}/public"
+      app.middleware.insert_before ::Rack::Lock, ::ActionDispatch::Static, "#{root}/public"
+      #app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
 
     initializer "authengine.application_controller" do |app|
