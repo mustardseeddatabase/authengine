@@ -2,16 +2,7 @@
   = yield
 
 - content_for :head do
-  :css
-    #authengine_logout { 
-      position : absolute;
-      padding-left : 700px;
-      padding-top : 20px;
-    }
-
-    #admin_logout > a{
-      color : white
-    }
+  = stylesheet_link_tag "authengine"
   - if Rails.env.test?
     %script
       confirm = function(){ return true; }; alert = function() { return true; };
