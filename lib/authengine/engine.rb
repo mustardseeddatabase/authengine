@@ -21,6 +21,7 @@ module Authengine
       config.mount_at += '/'  unless config.mount_at.last == '/'
     end
 
+    # serve static assets directly from the engine
     initializer "static assets" do |app|
       app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
@@ -30,11 +31,6 @@ module Authengine
         include AuthenticatedSystem
         include AuthorizedSystem
       end
-    end
-
-    # serve static assets directly from the engine
-    initializer "static assets" do |app|
-      app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
 
   end
