@@ -33,6 +33,12 @@ by including:
    and to include both the application content and the authengine content:
           =  content_for?(authengine) ? yield(:authengine) : yield
 
+In order to include the Administration and Logout links in pages that are not 
+produced by authengine, include in the head element of your application.html.haml
+layout file:
+
+          = stylesheet_link_tag "authengine"
+
 Admin_logout helper
 A helper is available called admin_logout, which should be included in all views.
 

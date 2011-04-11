@@ -16,11 +16,8 @@
     else if(document.getElementById('user_password').value.length < 6){alert('Please select a password longer than 6 characters')}
     else if(document.getElementById('user_password_confirmation').value != document.getElementById('user_password').value){alert('The two password fields don\'t match')}
     else{
-      ui_elements = document.getElementsByClassName('user_info')
-      for (var i = 0; i < ui_elements.length; i++){
-        ui_elements[i].style.display = 'none'
-      }
-      document.getElementById('privacy_policy').style.display = ''
+      $(".user_info").css("display", "none")
+      $("#privacy_policy").css("display", "block")
       }
   }
 

@@ -34,7 +34,7 @@ protected
     elsif user.activated_at.blank?
       failed_login("Your account is not active, please check your email for the activation code.")
     elsif user.enabled == false
-      failed_login("Your account has been disabled.")
+      failed_login("Your account has been disabled, please contact administrator.")
     else
       self.current_user = user
       successful_login
