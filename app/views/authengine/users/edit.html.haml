@@ -18,7 +18,7 @@
     %br/
     = f.text_field :email, :size => 60
 
-  = submit_or_return_to authengine_users_path
+  - submit_or_return_to authengine_users_path
 
 %script{:type=>'text/javascript'}
   document.getElementById('user_email').focus()
