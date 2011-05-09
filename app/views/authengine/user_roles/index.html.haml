@@ -5,6 +5,9 @@
     - for role in @user.roles
       %li 
         =role.name
+        [
+        = link_to "remove role", authengine_user_user_role_path(@user,role), :method => :delete
+        ]
 
 #roles_available
   %h3 Roles available:

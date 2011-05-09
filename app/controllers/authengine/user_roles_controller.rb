@@ -11,4 +11,10 @@ class Authengine::UserRolesController < ApplicationController
     @all_roles = Role.all(:order => :name)
     render :index
   end
+
+  def destroy
+    user_role = UserRole.find_by_role_id_and_user_id(params[:id],params[:user_id])
+    user_role.destroy
+    redirect_to authengine_user_user_roles_path(params[:user_id])
+  end
 end
