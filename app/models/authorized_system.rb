@@ -22,14 +22,14 @@ module AuthorizedSystem
   # or else the current request controller/action are used to check whether or not to display a page
   def check_permissions(controller = request.parameters["controller"], action = request.parameters["action"])
    if !logged_in?
-     logger.info "access denied"
+     logger.info "access denied: not logged in"
      access_denied
      return
    else
      permission = false
 
      if @action_id.nil?
-         logger.info "in 'check permissions' redirecting to referer or home"
+         logger.info "in 'check permissions' redirecting: action not found"
          if request.xhr?
            render :text=>"<div style='color:red'>Access permissions have not been configured for this information. Sorry.</div><div>Controller:#{controller}, Action:#{action}</div", :status=>404
          else

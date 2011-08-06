@@ -44,6 +44,7 @@ protected
 private
 
   def failed_login(message)
+    logger.info "login failed with message: #{message}"
     flash[:error] = message
     render :action => 'new'
   end

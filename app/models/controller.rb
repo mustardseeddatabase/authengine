@@ -37,7 +37,7 @@ class Controller < ActiveRecord::Base
   def self.engine_controller_paths
     Rails::Engine.subclasses.collect { |engine|
       engine.config.eager_load_paths.detect{|p| p=~/controller/}
-    }.flatten
+    }.flatten.compact
   end
 
   def self.application_files
