@@ -9,7 +9,7 @@ class Role < ActiveRecord::Base
   validates_uniqueness_of :name
 
   def self.developer
-    where('name = "developer"')
+    where('name = "developer"').first
   end
 
   def to_s
