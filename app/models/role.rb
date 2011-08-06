@@ -8,6 +8,10 @@ class Role < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  def self.developer
+    where('name = "developer"')
+  end
+
   def to_s
     name
   end

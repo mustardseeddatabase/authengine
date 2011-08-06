@@ -35,26 +35,19 @@ class Action < ActiveRecord::Base
 private
   # passed-in a controller object and a list of action name strings parsed from the xx_controller.rb file
   def self.remove_deleted_actions(cont, action_list)
-    puts "remove deleted, action_list is #{action_list.inspect}"
     # first see what actions are in the table but not in the action_list pulled from the passe-in controller file
     controller_actions = cont.actions.map(&:action_name)
-    puts "controller_actions: #{controller_actions.inspect}"
     actions_to_delete = controller_actions.delete_if{|a_name| action_list.include?(a_name)}
     # and delete them from the table
-    puts "deleting actions #{actions_to_delete.inspect}"
     actions_to_delete.map! { |ad| find_by_controller_id_and_action_name(cont.id,ad).id }
-    puts "action ids to be deleted #{actions_to_delete.inspect}"
     destroy(actions_to_delete)
   end
   
   def self.add_new_actions(cont, action_list)
-    puts "add new, action_list is #{action_list.inspect}"
     # then see what actions are in the action list pulled from the controllers, but not in the table
     actions = cont.actions.map(&:action_name)
-    puts "actions: #{actions.inspect}"
     action_list.delete_if{ |al| actions.include?(al) }    
     # and add them to the table
-    puts "adding actions #{action_list.inspect}"
     action_list.each { |a| Action.create(:controller_id=>cont.id,:action_name=>a) } unless action_list.empty?
   end
   
