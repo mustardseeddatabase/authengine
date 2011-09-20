@@ -8,8 +8,7 @@ class Authengine::UserRolesController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @user.user_roles.create(params[:user_role])
-    @all_roles = Role.all(:order => :name)
-    render :index
+    redirect_to authengine_user_user_roles_path(@user)
   end
 
   def destroy

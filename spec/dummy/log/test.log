@@ -109,3 +109,36 @@
  FROM sqlite_master
  WHERE type = 'table' AND NOT name = 'sqlite_sequence'
 [0m
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 19 07:38:26 -0700 2011
+
+
+Started GET "/users" for 127.0.0.1 at Mon Sep 19 07:38:26 -0700 2011
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 19 07:38:46 -0700 2011
+
+
+Started GET "/users" for 127.0.0.1 at Mon Sep 19 07:38:46 -0700 2011
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 19 07:43:03 -0700 2011
+
+
+Started GET "/users" for 127.0.0.1 at Mon Sep 19 07:43:03 -0700 2011
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 19 07:48:00 -0700 2011
+  Processing by Authengine::SessionsController#new as HTML
+Completed 500 Internal Server Error in 39ms
+
+
+Started GET "/users" for 127.0.0.1 at Mon Sep 19 07:48:00 -0700 2011
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 19 07:51:07 -0700 2011
+  Processing by Authengine::SessionsController#new as HTML
+Completed 500 Internal Server Error in 43ms
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 

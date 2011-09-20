@@ -1,28 +1,14 @@
 %h2 Roles for #{@user.first_last_name}
 %h3 Roles assigned:
-#roles_assigned
-  %ul
-    - for role in @user.roles
-      %li 
-        =role.name
-        [
-        = link_to "remove role", authengine_user_user_role_path(@user,role), :method => :delete
-        ]
+%ul#assigned_roles
+  - for role in @user.roles
+    %li #{role.name} [ #{link_to "remove role", authengine_user_user_role_path(@user,role), :method => :delete} ]
 
-#roles_available
-  %h3 Roles available:
-  %ul
-    - for role in (@all_roles - @user.roles)
-      = form_for @user_role, :url => authengine_user_user_roles_path(@user), :method => :post do |f|
-        = hidden_field :user_role, :role_id, :value => role.id
-        %li 
-          =role.name
-          [
-          = link_to_function "assign role", "submit_form($(this))"
-          ]
+%h3 Roles available:
+%ul#available_roles
+  - for role in (@all_roles - @user.roles)
+    = form_for @user_role, :url => authengine_user_user_roles_path(@user), :method => :post do |f|
+      = hidden_field :user_role, :role_id, :value => role.id
+      %li #{role.name} [ #{ link_to_function "assign role", "$(this).closest('form').submit()"} ]
 
-%p= link_to("Back", :back)
-:javascript
-  var submit_form = function(element){
-    element.parents('form').first().submit()
-  }
+%p= link_to "Back", authengine_users_path

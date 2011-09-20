@@ -50,10 +50,11 @@ private
   end
 
   def successful_login
-    if params[:remember_me] == "1"
-      self.current_user.remember_me
-      cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-    end
+    # 'remember me' is not used in this application
+    #if params[:remember_me] == "1"
+      #self.current_user.remember_me
+      #cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+    #end
 #   user is already logged-in
     flash[:notice] = "Logged in successfully"
     return_to = session[:return_to]

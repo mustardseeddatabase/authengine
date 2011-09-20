@@ -1,9 +1,5 @@
+= message_block :on => :role
 %h1 Add role
-
-- if @role.errors.any?
-  %ul
-    - @role.errors.full_messages.each do |msg|
-      %li=msg 
 
 = form_for @role, :url => authengine_roles_path  do |f|
   %table
