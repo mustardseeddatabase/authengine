@@ -7,7 +7,7 @@ class ActionRole < ActiveRecord::Base
     joins([:action => :controller,:role =>{:user_roles => :user}]).
       where("actions.action_name" => action,
             "controllers.controller_name" => controller,
-            "users.lastName" => user.lastName).
+            "users.login" => user.login).
       exists?
   end
 

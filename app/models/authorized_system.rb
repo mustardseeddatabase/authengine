@@ -33,27 +33,11 @@ module AuthorizedSystem
     if !logged_in?
       logger.info "access denied: not logged in"
       access_denied
-      return permission
+    elsif permitted?(controller, action, current_user)
+      permission = true
     else
-
-      #if @action_id.nil?
-      #logger.info "in 'check permissions' redirecting: action not found, requesting #{controller}##{action}"
-      #if request.xhr?
-      #render :text=>"<div style='color:red'>Access permissions have not been configured for this information. Sorry.</div><div>Controller:#{controller}, Action:#{action}</div", :status=>404
-      #else
-      #flash.now[:error]= "Access permission has not been configured for the page you requested. Sorry.<br/>(controller: #{controller}, action: #{action})"
-      #if request.env["HTTP_REFERER"].nil? then redirect_to home_path else redirect_to :back end
-      #end
-      #return permission
-      #end
-
-      permitted = permitted?(controller, action, current_user)
-      #if @permitted_actions.include?(@action_id) then permission = true end
-      if permitted then permission = true end
-      if !permission
-        logger.info "permission denied, #{controller}, #{action}"
-        permission_denied
-      end
+      logger.info "permission denied, #{controller}, #{action}"
+      permission_denied
     end
     permission
   end

@@ -1,5 +1,6 @@
 # Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
+require 'rubygems'
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
@@ -21,8 +22,8 @@ Capybara.default_selector = :css
 ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
 
 # Load support files
-#Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 Dir[File.join(ENGINE_RAILS_ROOT, "spec/support/**/*.rb")].each {|f| require f }
+Dir[File.join(Rails.root, "spec/factories/*.rb")].each{|f| require f }
 RSpec.configure do |config|
   # Remove this line if you don't want RSpec's should and should_not
   # methods or matchers

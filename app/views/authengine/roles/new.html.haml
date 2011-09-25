@@ -7,4 +7,7 @@
       %td
         %label{:for => :name} Name:
       %td{:colspan=>"3"}= f.text_field :name
+    %tr
+      %td= f.label(:parent_id, "Parent:")
+      %td{:colspan=>"3"}= f.select :parent_id, @roles.collect{|r| [r.name, r.id]}
   - submit_or_return_to authengine_roles_path

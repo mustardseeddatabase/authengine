@@ -5,6 +5,9 @@ class Role < ActiveRecord::Base
   has_many :action_roles
   has_many :actions, :through => :action_roles
 
+  belongs_to :parent, :class_name => 'Role'
+
+
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -14,6 +17,35 @@ class Role < ActiveRecord::Base
     else
       false # don't delete a role if there are users assigned
     end
+  end
+
+  # takes either an array of roles or a single role object
+  def self.equal_or_lower_than(role)
+    roles = role.is_a?(Array) ? role : [role]
+    collection = roles.inject([]) do |ar, r|
+      ar + with_ancestor(r)
+    end
+    (collection + roles).uniq
+  end
+
+  # returns an array of roles that have the passed-in role as an
+  # ancestor
+  def self.with_ancestor(role)
+    all.select{|r| r.has_ancestor?(role)}
+  end
+
+  def has_ancestor?(role)
+    ancestors.include?(role)
+  end
+
+  def ancestors
+    node, nodes = self, []
+    nodes << node = node.parent while node.parent
+    nodes
+  end
+
+  def is_developer?
+    name == 'developer'
   end
 
   def self.developer

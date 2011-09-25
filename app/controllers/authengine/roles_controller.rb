@@ -2,7 +2,8 @@ class Authengine::RolesController < ApplicationController
   layout 'authengine/layouts/authengine'
 
   def index
-    @all_roles = Role.find(:all, :order=>:name)
+    @all_roles = Role.find(:all, :order =>:name)
+    @roles     = Role.equal_or_lower_than(current_user.roles)
   end
 
   def destroy
@@ -16,11 +17,12 @@ class Authengine::RolesController < ApplicationController
   end
 
   def new
-    @role = Role.new
+    @role  = Role.new
+    @roles = Role.equal_or_lower_than(current_user.roles)
   end
 
 
- def create
+  def create
     @role = Role.new(params[:role])
 
     if @role.save

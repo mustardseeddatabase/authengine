@@ -142,3 +142,5 @@ Started GET "/" for 127.0.0.1 at Mon Sep 19 07:51:07 -0700 2011
 Completed 500 Internal Server Error in 43ms
   [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
   [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
