@@ -30,7 +30,7 @@ class Authengine::UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.user_roles.build
+    @user.persistent_user_roles.build
     @roles = Role.all
   end
 

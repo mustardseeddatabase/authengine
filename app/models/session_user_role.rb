@@ -1,0 +1,2 @@
+class SessionUserRole < UserRole
+end

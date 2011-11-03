@@ -21,13 +21,13 @@ class Authengine::RolesController < ApplicationController
     @roles = Role.equal_or_lower_than(current_user.roles)
   end
 
-
   def create
     @role = Role.new(params[:role])
 
     if @role.save
       redirect_to authengine_roles_path
     else
+      @roles = Role.equal_or_lower_than(current_user.roles)
       render :action => "new"
     end
   end

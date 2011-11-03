@@ -19,9 +19,12 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40, :on => :update
   validates_uniqueness_of   :login, :case_sensitive => false, :on => :update
 
-  has_many :user_roles, :dependent=>:delete_all
-  accepts_nested_attributes_for :user_roles
-  has_many :roles, :through=>:user_roles
+  has_many :persistent_user_roles, :dependent=>:delete_all
+  accepts_nested_attributes_for :persistent_user_roles
+  #has_many :roles, :through=>:persistent_user_roles
+
+  has_many :session_user_roles, :dependent=>:delete_all
+  #has_many :roles, :through=>:session_user_roles
 
   has_many :useractions, :dependent=>:delete_all
   has_many :actions, :through=>:useractions
@@ -141,6 +144,10 @@ class User < ActiveRecord::Base
 
   def has_role?(name)
     self.roles.find_by_name(name) ? true : false
+  end
+
+  def roles
+    persistent_user_roles.map(&:role) + session_user_roles.map(&:role)
   end
 
 

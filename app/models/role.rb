@@ -22,10 +22,16 @@ class Role < ActiveRecord::Base
   # takes either an array of roles or a single role object
   def self.equal_or_lower_than(role)
     roles = role.is_a?(Array) ? role : [role]
+    (lower_than(role) + roles).uniq
+  end
+
+  # takes either an array of roles or a single role object
+  def self.lower_than(role)
+    roles = role.is_a?(Array) ? role : [role]
     collection = roles.inject([]) do |ar, r|
       ar + with_ancestor(r)
     end
-    (collection + roles).uniq
+    (collection).uniq
   end
 
   # returns an array of roles that have the passed-in role as an

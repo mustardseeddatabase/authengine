@@ -1,4 +1,5 @@
-# encoding: UTF-8
+#!/usr/bin/env rake
+
 require 'rubygems'
 begin
   require 'bundler/setup'
@@ -25,4 +26,6 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
 end
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
+load 'rails/tasks/engine.rake'
 

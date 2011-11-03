@@ -1,23 +1,7 @@
 module AuthorizedSystem
-  def load_actions_list
-    #@all_actions = Action.list
-    #so we can determine the action id of any action from @all_actions[controller][action]
-    #action_id is the id of the current page
-    #@action_id = @all_actions[request.parameters["controller"]][request.parameters["action"]] unless @all_actions.empty? || @all_actions[request.parameters["controller"]].nil?
-  end
-
-  def load_permitted_actions
-    #the list of action id's permitted for the roles of teh currently logged-in user
-    #todo for some reason, this isn't being called when user tries to login, is redirected to the login page, and then is directed back to the desired page
-    #@permitted_actions = Array.new
-    #if logged_in?
-      #user_role_ids = @current_user.roles.map(&:id)
-      #@permitted_actions = ActionRole.find_all_by_role_id(user_role_ids).map(&:action_id)
-    #end
-  end
 
   def action_permitted?(controller, action, user)
-    ActionRole.exists_for(controller, action, user)
+    ActionRole.permits_access_for(controller, action, user)
   end
 
   def permitted?(controller, action, user)

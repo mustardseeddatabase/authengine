@@ -1,0 +1,2 @@
+class PersistentUserRole < UserRole
+end

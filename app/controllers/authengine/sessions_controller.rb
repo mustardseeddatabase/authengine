@@ -14,10 +14,12 @@ class Authengine::SessionsController < ApplicationController
   def create
     logger.info "session controller: create"
     password_authentication(params[:login], params[:password])
+    remove_session_user_roles
   end
 
   def destroy
     self.current_user.forget_me if logged_in?
+    remove_session_user_roles
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
@@ -25,6 +27,9 @@ class Authengine::SessionsController < ApplicationController
   end
 
 protected
+  def remove_session_user_roles
+    current_user.session_user_roles.clear if current_user != :false
+  end
 
   def password_authentication(login, password)
     user = User.authenticate(login, password)
