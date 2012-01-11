@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
     end
   end
   class ActivationCodeNotFound < StandardError; end
+  class ArgumentError < StandardError; end
   class AlreadyActivated < StandardError
     attr_reader :user, :message;
     def initialize(user, message=nil)
