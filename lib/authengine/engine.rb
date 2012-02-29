@@ -26,7 +26,8 @@ module Authengine
       # need to move ActionDispatch::Static ahead of Rack::Sendfile as the 
       # mod_xsendfile is apparently not installed on the Apache server
       # see http://rack.rubyforge.org/doc/classes/Rack/Sendfile.html
-      # this was causing blank css files to be sent
+      # this was causing blank css files to be sent.
+      # 'root' here is the full path to the engine root
       app.middleware.insert_before ::Rack::Lock, ::ActionDispatch::Static, "#{root}/public"
       #app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end

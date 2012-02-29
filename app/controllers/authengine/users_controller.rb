@@ -10,10 +10,9 @@ class Authengine::UsersController < ApplicationController
   #before_filter :check_administrator_role, :only => [:index, :destroy, :enable]
   #before_filter :user_or_current_user, :only => [:show, :edit, :update]
 
-  skip_before_filter :log_referer, :only=>[:edit_self, :show, :update, :update_self]
   # activate is where a user with the correct activation code
   # is redirected to, so they can enter passwords and login name
-  skip_before_filter :check_permissions, :log_useractions, :only=>[:activate, :signup]
+  skip_before_filter :check_permissions, :only=>[:activate, :signup]
 
   def index
     @users = User.find(:all, :order=>"lastName, firstName")
@@ -30,7 +29,7 @@ class Authengine::UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.persistent_user_roles.build
+    @user.user_roles.build
     @roles = Role.all
   end
 
@@ -50,11 +49,6 @@ class Authengine::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-# the log_referer before_filter is skipped for the edit_self action so that
-# we may keep in the session[:referer] variable the page from which
-# this action was called (it's in the header of every page)
-# The log_referer filter makes sure that the back button links
-# to the correct page.
   def edit_self # edit profile of current user
     @user = current_user
     render :template => 'users/edit'
@@ -63,12 +57,16 @@ class Authengine::UsersController < ApplicationController
 # account was created by admin and now user is entering username/password
   def activate
     # TODO must remember to reset the session[:activation_code]
-    self.current_user = User.find_and_activate!(params[:activation_code])
-    if @current_user.update_attributes(params[:user])
+    # looks as if setting current user (next line) was causing the user to be
+    # logged-in after activation
+    #self.current_user = User.find_and_activate!(params[:activation_code])
+    #if @current_user.update_attributes(params[:user])
+    user = User.find_and_activate!(params[:activation_code])
+    if user.update_attributes(params[:user])
       redirect_to root_path
     else
-      flash[:warn] = @current_user.errors.full_messages
-      redirect_to signup_authengine_user_path(@current_user)
+      flash[:warn] = user.errors.full_messages
+      redirect_to signup_authengine_user_path(user)
     end
   rescue User::ArgumentError
     flash[:notice] = 'Activation code not found. Please ask the database administrator to create an account for you.'

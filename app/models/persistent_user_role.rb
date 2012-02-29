@@ -1,2 +1,0 @@
-class PersistentUserRole < UserRole
-end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root :to => "authengine/sessions#new"
+
   namespace :authengine do
     resources :accounts
     resources :actions
@@ -11,7 +13,12 @@ Rails.application.routes.draw do
     resources :roles
     resources :users do
       resource :account
-      resources :user_roles
+      resources :user_roles do
+        collection do
+          get 'edit'
+          put 'update'
+        end
+      end
 
       member do
         put 'enable'
@@ -33,5 +40,4 @@ Rails.application.routes.draw do
   match '/login' => "authengine/sessions#new"
   match '/logout' => "authengine/sessions#destroy"
 
-  root :to => "authengine/sessions#new"
 end
