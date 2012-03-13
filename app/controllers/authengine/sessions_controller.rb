@@ -13,7 +13,7 @@ class Authengine::SessionsController < ApplicationController
   # user logs in
   def create
     logger.info "session controller: create"
-    password_authentication(params[:login], params[:password])
+    authenticate_with_password(params[:login], params[:password])
   end
 
   # user logs out
@@ -32,7 +32,7 @@ protected
     session[:role] = SessionRole.new
   end
 
-  def password_authentication(login, password)
+  def authenticate_with_password(login, password)
     user = User.authenticate(login, password)
     if user == nil
       failed_login("Your username or password is incorrect.")
