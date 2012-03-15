@@ -2,8 +2,7 @@ class Authengine::AccountsController < ApplicationController
   layout 'authengine/layouts/authengine'
 
   # because a user cannot login until the account is activated
-  skip_before_filter :check_permissions, :log_useractions, :only => [:show]
-  skip_before_filter :log_referer, :only=>[:edit, :update]
+  skip_before_filter :check_permissions, :only => [:show]
 
   # Activate action
   def show
@@ -15,7 +14,7 @@ class Authengine::AccountsController < ApplicationController
     redirect_to :controller=>:users, :action=>:signup, :id=>@user.id
   rescue User::ArgumentError
     flash[:notice] = 'Activation code not found. Please contact database administrator.'
-    redirect_to login_path 
+    redirect_to login_path
   rescue User::ActivationCodeNotFound
     flash[:notice] = 'Activation code not found. Please contact database administrator.'
     redirect_to login_path
@@ -23,18 +22,18 @@ class Authengine::AccountsController < ApplicationController
     flash[:notice] = 'Your account has already been activated. You can log in below.'
     redirect_to login_path
   end
-  
+
   def edit
   end
 
-  # Change password action  
+  # Change password action
   def update
 # removed to make restful (should actually be put)
 #    return unless request.post?
     if User.authenticate(current_user.login, params[:old_password])
       if ((params[:password] == params[:password_confirmation]) && !params[:password_confirmation].blank?)
         current_user.password_confirmation = params[:password_confirmation]
-        current_user.password = params[:password]        
+        current_user.password = params[:password]
         if current_user.save
           flash[:notice] = "Password updated."
           # redirect_to user_path(current_user)
@@ -46,12 +45,12 @@ class Authengine::AccountsController < ApplicationController
       else
         flash[:error] = "New password does not match the password confirmation."
         @old_password = params[:old_password]
-        render :action => 'edit'      
+        render :action => 'edit'
       end
     else
       flash[:error] = "Your old password is incorrect."
       render :action => 'edit'
-    end 
+    end
   end
 
 end

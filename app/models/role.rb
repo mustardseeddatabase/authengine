@@ -1,3 +1,6 @@
+# Roles are hierarchically organized, so that the current role
+# for a session can be downgraded to a lower role.
+# The hierarchy gives meaning to "lower role".
 class Role < ActiveRecord::Base
   has_many :user_roles
   has_many :users, :through=>:user_roles

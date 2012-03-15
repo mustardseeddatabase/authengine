@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110925202800) do
+ActiveRecord::Schema.define(:version => 20111003074700) do
 
   create_table "action_roles", :force => true do |t|
     t.integer  "role_id",    :limit => 8
@@ -26,12 +27,16 @@ ActiveRecord::Schema.define(:version => 20110925202800) do
     t.datetime "updated_at"
   end
 
+  add_index "actions", ["action_name"], :name => "index_actions_on_action_name"
+
   create_table "controllers", :force => true do |t|
     t.string   "controller_name"
     t.datetime "last_modified"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "controllers", ["controller_name"], :name => "index_controllers_on_controller_name"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -76,5 +81,7 @@ ActiveRecord::Schema.define(:version => 20110925202800) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["login"], :name => "index_users_on_login"
 
 end

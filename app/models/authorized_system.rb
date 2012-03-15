@@ -1,11 +1,23 @@
+# AuthorizedSystem is 'include'd in ActionController by the authengine engine
+# see lib/authengine/engine.rb
 module AuthorizedSystem
-
-  def action_permitted?(controller, action, user)
-    ActionRole.permits_access_for(controller, action, user)
+  # established for the session when the user logs in
+  # may be modified later if user's roles are modified
+  # or if session is downgraded
+  def current_role_ids=(ids)
+    session[:role].current_role_ids = ids
   end
 
-  def permitted?(controller, action, user)
-    action_permitted?(controller, action, user) && logged_in?
+  def current_role_ids
+    session[:role].current_role_ids
+  end
+
+  def action_permitted?(controller, action)
+    ActionRole.permits_access_for(controller, action, current_role_ids)
+  end
+
+  def permitted?(controller, action)
+    action_permitted?(controller, action) && logged_in?
   end
 
   # for each and every action, we check the configured permission
@@ -17,7 +29,7 @@ module AuthorizedSystem
     if !logged_in?
       logger.info "access denied: not logged in"
       access_denied
-    elsif permitted?(controller, action, current_user)
+    elsif permitted?(controller, action)
       permission = true
     else
       logger.info "permission denied, #{controller}, #{action}"

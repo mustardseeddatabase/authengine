@@ -4,19 +4,19 @@ require "date"
 class Authengine::SessionsController < ApplicationController
   layout 'authengine/layouts/authengine'
 
-  skip_before_filter :load_actions_list, :check_permissions, :log_useractions, :log_referer, :only => [:new, :create, :destroy]
+  skip_before_filter :check_permissions, :only => [:new, :create, :destroy]
 
 
   def new
-    @page_title = "Login"
   end
 
+  # user logs in
   def create
     logger.info "session controller: create"
-    password_authentication(params[:login], params[:password])
-    remove_session_user_roles
+    authenticate_with_password(params[:login], params[:password])
   end
 
+  # user logs out
   def destroy
     self.current_user.forget_me if logged_in?
     remove_session_user_roles
@@ -27,14 +27,14 @@ class Authengine::SessionsController < ApplicationController
   end
 
 protected
+
   def remove_session_user_roles
-    current_user.session_user_roles.clear if current_user != :false
+    session[:role] = SessionRole.new
   end
 
-  def password_authentication(login, password)
+  def authenticate_with_password(login, password)
     user = User.authenticate(login, password)
     if user == nil
-      #failed_login_log.warn("\n#{Time.now}:  Failed login with parameters: username: #{login}, password: #{password}, remote address: #{request.env["REMOTE_ADDR"]}")
       failed_login("Your username or password is incorrect.")
     elsif user.activated_at.blank?
       failed_login("Your account is not active, please check your email for the activation code.")
@@ -42,6 +42,8 @@ protected
       failed_login("Your account has been disabled, please contact administrator.")
     else
       self.current_user = user
+      session[:role] = SessionRole.new
+      session[:role].add_roles(user.role_ids)
       successful_login
     end
   end
