@@ -25,7 +25,7 @@
 = form_for :user, :url => {:action=>:activate, :activation_code=>session[:activation_code], :method=>:post}, :html=>{:onsubmit=>"return check_policy()"} do |f| 
   .user_info
     %h1 
-      Welcome #{@user.firstName} #{@user.lastName} to the #{APPLICATION_NAME} Database
+      Welcome #{@user.firstName} #{@user.lastName} to the #{APPLICATION_NAME || "database"}
     %table
       %tr
         %td
