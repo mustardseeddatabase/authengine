@@ -31,7 +31,7 @@ class Authengine::UserMailer < ActionMailer::Base
     @admin = User.find_by_login('admin')
     @recipients  = @admin.email
     @from        = @admin.email
-    @subject     = "CCStB Database - "
+    @subject     = "Mustard Seed Database - "
     @sent_on     = Time.now
     @subject    += subject
     @body  = body
@@ -40,8 +40,8 @@ class Authengine::UserMailer < ActionMailer::Base
 protected
   def setup_email(user)
     @recipients  = "#{user.email}"
-    @from        = "CCStB Database Administrator<#{ADMIN_EMAIL}>"
-    @subject     = "CCStB Database - "
+    @from        = "Mustard Seed Database Administrator<#{ADMIN_EMAIL}>"
+    @subject     = "Mustard Seed Database - "
     @sent_on     = Time.now
     @user        = user
   end
