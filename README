@@ -1,6 +1,5 @@
 Add authengine to your Gemfile:
       gem 'authengine'
-      gem 'haml'
 
 And run:
       bundle install
