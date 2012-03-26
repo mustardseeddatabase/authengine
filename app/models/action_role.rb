@@ -3,9 +3,9 @@ class ActionRole < ActiveRecord::Base
   belongs_to :action
 
   # this is the key database lookup for checking permissions
-  # returns true if there is a user_role
+  # returns true if there is at least one of the passed-in role ids
   # which explicitly permits (i.e. the role has action_role associations)
-  # the specified controller and action for the specified user
+  # the specified controller and action
   def self.permits_access_for(controller, action, role_ids)
     joins([:role, :action => :controller ]).
       where("roles.id" => role_ids).

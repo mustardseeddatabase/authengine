@@ -1,5 +1,5 @@
-require '../../app/models/authenticated_system'
-require '../../app/models/authorized_system'
+require Authengine::Engine.root.join('app', 'models', 'authenticated_system').to_s
+require Authengine::Engine.root.join('app', 'models', 'authorized_system').to_s
 require 'flexmock'
 SITE_URL = "same_domain.com"
 
