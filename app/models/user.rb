@@ -144,6 +144,21 @@ class User < ActiveRecord::Base
     self.roles.find_by_name(name) ? true : false
   end
 
+  def self.create_by_sql(attributes)
+    user = User.new(attributes)
+    user.send('encrypt_password')
+    user.send('make_activation_code')
+    now = DateTime.now.to_formatted_s(:db)
+    query = <<-SQL
+    INSERT INTO users
+        (activated_at, activation_code, created_at, crypted_password, email, enabled, firstName, lastName, login, password_reset_code, remember_token, remember_token_expires_at, salt, status, type, updated_at)
+        VALUES
+        ( '#{now}','#{user.activation_code}','#{now}', '#{user.crypted_password}', NULL, 1, '#{user.firstName}', '#{user.lastName}', '#{user.login}', NULL, NULL, NULL, '#{user.salt}', NULL, NULL,'#{now}')
+    SQL
+    #can't use ActiveRecord#create here as it would trigger a notification email
+    ActiveRecord::Base.connection.execute(query)
+  end
+
 protected
 
   # before filter
