@@ -156,7 +156,7 @@ class User < ActiveRecord::Base
         ( '#{now}','#{user.activation_code}','#{now}', '#{user.crypted_password}', NULL, 1, '#{user.firstName}', '#{user.lastName}', '#{user.login}', NULL, NULL, NULL, '#{user.salt}', NULL, NULL,'#{now}')
     SQL
     #can't use ActiveRecord#create here as it would trigger a notification email
-    ActiveRecord::Base.connection.execute(query)
+    ActiveRecord::Base.connection.insert_sql(query)
   end
 
 protected

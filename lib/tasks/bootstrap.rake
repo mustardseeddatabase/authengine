@@ -12,10 +12,18 @@ namespace :authengine do
                       :login     => args[:login],
                       :password  => args[:password],
                       :password_confirmation => args[:password]}
-        if User.create_by_sql(attributes)
+        if id = User.create_by_sql(attributes)
           puts "Creating account for #{attributes[:firstName]} #{attributes[:lastName]} login: #{attributes[:login]}, password #{attributes[:password]}"
         end
       end
+    end
+
+    if
+      user = User.find(id)
+      role = Role.create(:name => 'admin')
+      user.roles << role
+      Controller.update_table
+      ActionRole.bootstrap_access_for(role)
     end
   end
 end

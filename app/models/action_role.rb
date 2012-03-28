@@ -15,9 +15,15 @@ class ActionRole < ActiveRecord::Base
   end
 
   def self.assign_developer_access
-    developer_id = Role.developer.id
+    developer_id = Role.developer_id
     Action.all.each do |a| 
       find_or_create_by_action_id_and_role_id(a.id, developer_id)
+    end if developer_id
+  end
+
+  def self.bootstrap_access_for(role)
+    Action.all.each do |a|
+      find_or_create_by_action_id_and_role_id(a.id, role.id)
     end
   end
 end

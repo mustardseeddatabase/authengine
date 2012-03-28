@@ -61,6 +61,10 @@ class Role < ActiveRecord::Base
     where('name = "developer"').first
   end
 
+  def self.developer_id
+    developer && developer.id
+  end
+
   def to_s
     name
   end
