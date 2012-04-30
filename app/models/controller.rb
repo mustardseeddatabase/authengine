@@ -76,7 +76,8 @@ class Controller < ActiveRecord::Base
     all_controller_names.each do |f|
       cont = f.tableize.gsub!("_controllers","")
       logger.info "controller: #{cont}"
-      logger.info "admin action roles count: #{ActionRole.find_by_role_id(Role.find_by_name("adminisrator")).count}"
+      admin_name = Role.find_by_name("administrator") ? "administrator" : "admin"
+      logger.info "admin action roles count: #{ActionRole.find_all_by_role_id(Role.find_by_name(admin_name)).count}"
       if !cc.keys.include?(cont) # it's not in the db
         new_controller = new(:controller_name=>f.underscore.gsub!("_controller", ""), :last_modified=>Date.today) # add controller to controllers table as there's not a record corresponding with the file
         new_controller.actions << new_controller.action_list.map { |a| Action.new(:action_name=>a[1]) }# when a new controller is added, its actions must be added to the actions.file
