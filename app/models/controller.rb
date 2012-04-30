@@ -55,6 +55,7 @@ class Controller < ActiveRecord::Base
   def modified?
     logger.info "file modification time is #{file_modification_time}"
     logger.info "last modified time is  #{last_modified.getutc.to_datetime}"
+    logger.info "are they the same? #{file_modification_time == last_modified.getutc.to_datetime}"
     file_modification_time != last_modified.getutc.to_datetime
   end
 
