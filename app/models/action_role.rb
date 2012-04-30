@@ -16,7 +16,7 @@ class ActionRole < ActiveRecord::Base
 
   def self.assign_developer_access
     developer_id = Role.developer_id
-    administrator_id = Role.find_by_name("admin").id
+    administrator_id = Role.find_by_name("administrator").id
     logger.info "before dev access, admin has #{find_all_by_role_id(administrator_id).count}"
     Action.all.each do |a|
       find_or_create_by_action_id_and_role_id(a.id, developer_id)
