@@ -87,8 +87,8 @@ class Controller < ActiveRecord::Base
         # finally modify the last_modified date of the controller record to match the actual file
         cc[cont].update_attribute(:last_modified,cc[cont].file_modification_time)
       end
+      ActionRole.assign_developer_access
     end
-    ActionRole.assign_developer_access
     # delete any records in the controllers table for which there's no xx_controller.rb file... it must've been deleted
     cc.each { |name,controller| controller.destroy if !all_controller_names.map{|cn| cn.tableize.gsub!("_controllers","")}.include?(name) }
 
