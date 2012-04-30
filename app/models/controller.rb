@@ -53,13 +53,13 @@ class Controller < ActiveRecord::Base
   # and so responds both to the file being edited and also the database being restored
   # from an older version.
   def modified?
-    logger.info "file modification time is #{file_modification_time.getutc.to_datetime}"
-    logger.info "last modified time is  #{last_modified.getutc.to_datetime}"
-    file_modification_time.getutc.to_datetime != last_modified.getutc.to_datetime
+    logger.info "file modification time is #{file_modification_time}"
+    logger.info "last modified time is  #{last_modified}"
+    file_modification_time != last_modified
   end
 
   def file_modification_time
-    file.mtime.to_datetime
+    file.mtime.getutc.to_datetime
   end
 
   def file
