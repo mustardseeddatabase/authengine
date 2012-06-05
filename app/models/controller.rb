@@ -52,10 +52,8 @@ class Controller < ActiveRecord::Base
   # this triggers re-parsing the actions in the file whether it's older or newer
   # and so responds both to the file being edited and also the database being restored
   # from an older version.
+  # Only by converting to string could I persuade two apparently equal DateTime objects to match!
   def modified?
-    logger.info "file modification time is #{file_modification_time}"
-    logger.info "last modified time is  #{last_modified.getutc.to_datetime}"
-    logger.info "are they the same? #{file_modification_time.to_s == last_modified.getutc.to_datetime.to_s}"
     file_modification_time.to_s != last_modified.getutc.to_datetime.to_s
   end
 
@@ -78,18 +76,13 @@ class Controller < ActiveRecord::Base
     cc = Controller.all.inject({}){ |hash,controller| hash[controller.controller_name]=controller; hash } # from the database
     all_controller_names.each do |f|
       cont = f.tableize.gsub!("_controllers","")
-      logger.info "controller: #{cont}"
       admin_name = Role.find_by_name("administrator") ? "administrator" : "admin"
-      logger.info "admin action roles count: #{ActionRole.find_all_by_role_id(Role.find_by_name(admin_name)).count}"
       if !cc.keys.include?(cont) # it's not in the db
-        logger.info "new controller #{cont} added"
         new_controller = new(:controller_name=>f.underscore.gsub!("_controller", ""), :last_modified=>Date.today) # add controller to controllers table as there's not a record corresponding with the file
         new_controller.actions << new_controller.action_list.map { |a| Action.new(:action_name=>a[1]) }# when a new controller is added, its actions must be added to the actions.file
         new_controller.save
       elsif cc[cont].modified? # file was modified since db was updated, so read the actions from the file, and add/delete as necessary
-        logger.info "#{cont} was modified"
         action_names = cc[cont].actions_from_file
-        logger.info "actions from file: #{action_names.inspect}"
         Action.update_table_for(cc[cont],action_names)
         # finally modify the last_modified date of the controller record to match the actual file
         cc[cont].update_attribute(:last_modified,cc[cont].file_modification_time)
