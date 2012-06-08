@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   # host application if they are runtime dependencies! (bug?
   # or misunderstanding?)
   s.add_dependency 'rspec', '>= 2.0.0'
-  s.add_dependency 'rails', '~>3.1.3'
+  s.add_dependency 'rails', '~>3.2.0'
   s.add_dependency 'sqlite3-ruby'
   s.add_dependency 'capybara'
   s.add_dependency 'rspec-rails', ">= 2.0.0"

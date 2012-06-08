@@ -41,6 +41,7 @@ class Controller < ActiveRecord::Base
   end
 
   def self.application_files
+    debugger
     Dir.new(CONTROLLERS_DIR).entries.reject{|c| c.match(/^\./)}.reject{|c| c == 'application_controller.rb'}
   end
 
