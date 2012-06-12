@@ -14,6 +14,11 @@ class Authengine::UserMailer < ActionMailer::Base
     setup_email(user)
     @subject    += 'Your account has been activated!'
     @url  = "http://#{SITE_URL}/authengine/login"
+    mail( :to => @recipients,
+          :subject => @subject,
+          :date => @sent_on,
+          :from => @from
+        )
   end
 
   def forgot_password(user)
