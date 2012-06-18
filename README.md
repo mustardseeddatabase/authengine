@@ -27,7 +27,9 @@ When logged in, the preconfigured admin user is assigned to the 'developer' role
 
 The content for the authengine views is rendered as:
 
-    content_for(:authengine_logout) # for the logout link, and:
+    content_for(:authengine_logout) # for the logout link
+
+and:
 
     content_for(:authengine) # for the main page content
 
