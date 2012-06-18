@@ -26,8 +26,8 @@ When logged in, the preconfigured admin user is assigned to the 'developer' role
 # Layout
 
 The content for the authengine views is rendered as:
-          *  content_for(:authengine_logout) for the logout link, and:
-          *  content_for(:authengine) for the main page content
+*  content_for(:authengine_logout) for the logout link, and:
+*  content_for(:authengine) for the main page content
 
 In your layouts/application.html.haml template, include these view components by including:
 
