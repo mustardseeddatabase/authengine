@@ -39,4 +39,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'haml'
   s.add_dependency 'factory_girl_rails'
   s.add_dependency 'database_cleaner'
+  s.add_dependency 'jasmine'
+  s.add_dependency 'jasminerice'
 end

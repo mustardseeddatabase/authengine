@@ -59,10 +59,8 @@ class Authengine::UsersController < ApplicationController
     # TODO must remember to reset the session[:activation_code]
     # looks as if setting current user (next line) was causing the user to be
     # logged-in after activation
-    #self.current_user = User.find_and_activate!(params[:activation_code])
-    #if @current_user.update_attributes(params[:user])
     user = User.find_and_activate!(params[:activation_code])
-    if user.update_attributes(params[:user])
+    if user.update_attributes(params[:user].slice(:login, :email, :password, :password_confirmation))
       redirect_to root_path
     else
       flash[:warn] = user.errors.full_messages
