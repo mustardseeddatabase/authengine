@@ -2,7 +2,7 @@ class Authengine::UserMailer < ActionMailer::Base
   def signup_notification(user)
     setup_email(user)
     @subject    += 'Please activate your new account'  
-    @url         = "http://#{SITE_URL}/authengine/activate/#{user.activation_code}"  
+    @url = authengine_activate_url(:activation_code => user.activation_code)
     mail( :to => @recipients,
           :subject => @subject,
           :date => @sent_on,
@@ -13,7 +13,7 @@ class Authengine::UserMailer < ActionMailer::Base
   def activation(user)
     setup_email(user)
     @subject    += 'Your account has been activated!'
-    @url  = "http://#{SITE_URL}/authengine/login"
+    @url = login_url
     mail( :to => @recipients,
           :subject => @subject,
           :date => @sent_on,
