@@ -74,15 +74,15 @@ class Controller < ActiveRecord::Base
   # in the /app/controllers directory
   def self.update_table
     cc = Controller.all.inject({}){ |hash,controller| hash[controller.controller_name]=controller; hash } # from the database
-    all_controller_names.each do |f|
-      cont = f.tableize.gsub!("_controllers","")
+    all_controller_names.each do |f| # f is of the form "ItemsController"
+      cont = f.tableize.gsub!("_controllers","") # cont is of the form "items"
       admin_name = Role.find_by_name("administrator") ? "administrator" : "admin"
       if !cc.keys.include?(cont) # it's not in the db
         new_controller = new(:controller_name=>f.underscore.gsub!("_controller", ""), :last_modified=>Date.today) # add controller to controllers table as there's not a record corresponding with the file
         new_controller.actions << new_controller.action_list.map { |a| Action.new(:action_name=>a[1]) }# when a new controller is added, its actions must be added to the actions.file
         new_controller.save
       elsif cc[cont].modified? # file was modified since db was updated, so read the actions from the file, and add/delete as necessary
-        action_names = cc[cont].actions_from_file
+        action_names = cc[cont].actions_from_file # action_names is of the form ["index", "new", "edit", "create", "update"]
         Action.update_table_for(cc[cont],action_names)
         # finally modify the last_modified date of the controller record to match the actual file
         cc[cont].update_attribute(:last_modified,cc[cont].file_modification_time)
@@ -107,9 +107,9 @@ class Controller < ActiveRecord::Base
   # and never get changed "on the fly". However this fact should be considered when testing!
   def actions_from_file
     # there's a workaround here for some strangeness that appeared in Rails 3
-    # where public_instance_methods returns some spurios methods with the format
+    # where public_instance_methods returns some spurious methods with the format
     # _one_time_conditions_valid_nnn?
-    controller.public_instance_methods(false).reject{|m| m.match(/one_time_conditions_valid/)}
+    controller.public_instance_methods(false).reject{|m| m.match(/one_time_conditions_valid/)}.map(&:to_s)
   end
 
   def controller
