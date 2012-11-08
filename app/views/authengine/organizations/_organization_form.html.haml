@@ -1,0 +1,28 @@
+= form_for [:authengine,@organization] do |f|
+  %table
+    %tr
+      %td= f.label :name
+      %td= f.text_field :name
+    %tr
+      %td= f.label :street
+      %td= f.text_field :street
+    %tr
+      %td= f.label :city
+      %td= f.text_field :city
+    %tr
+      %td= f.label :zip
+      %td= f.text_field :zip
+    %tr
+      %td= f.label :state
+      %td= f.select :state, State.list, :include_blank => true
+    %tr
+      %td= f.label :phone
+      %td= f.text_field :phone
+    %tr
+      %td= f.label :email
+      %td= f.text_field :email
+    %tr
+      %td= f.label :active
+      %td= f.check_box :active
+
+  - submit_or_return_to authengine_organizations_path

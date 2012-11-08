@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :useractions, :dependent=>:delete_all
   has_many :actions, :through=>:useractions
 
+  belongs_to :organization
+
   before_save :encrypt_password
   before_create :make_activation_code
 

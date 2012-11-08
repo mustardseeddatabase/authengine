@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :action_roles do
       put 'update_all', :on => :collection
     end
+    resources :organizations
 
     resources :sessions
     resources :roles

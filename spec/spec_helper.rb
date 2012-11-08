@@ -8,6 +8,7 @@ require "rspec/rails"
 require "factory_girl_rails"
 require 'database_cleaner'
 require 'authengine/testing_support/factories/user_factory'
+require 'authengine/testing_support/factories/organization_factory'
 
 
 ENGINE_RAILS_ROOT = File.join( File.dirname(__FILE__), '../')

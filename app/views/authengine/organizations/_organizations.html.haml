@@ -1,0 +1,17 @@
+- if organizations.empty?
+  %table{:class => "#{name}"}
+    %tr
+      %td (none)
+- else
+  %table{:class => "#{name}"}
+    %tr
+      %th Name
+    - for organization in organizations do
+      %tr.organization
+        %td.organization_name= link_to organization.name, authengine_organization_path(organization), :method => :get
+        %td= link_to "edit", edit_authengine_organization_path(organization)
+        %td
+          -if organization.users.empty?
+            = link_to "delete", authengine_organization_path(organization), :method => :delete, :confirm => 'are you sure?'
+          -else
+            = link_to "delete", "javascript:void(0)", :onclick => "$(this).after('Can\\'t delete a pantry that already has users. De-activate instead')"
