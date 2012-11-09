@@ -41,5 +41,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'database_cleaner'
   s.add_dependency 'jasmine'
   s.add_dependency 'jasminerice'
-  s.add_dependency 'ruby-debug19'
+  s.add_dependency 'debugger'
+  #s.add_dependency 'ruby-debug19'
 end
