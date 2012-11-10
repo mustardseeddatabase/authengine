@@ -5,18 +5,22 @@
       %li=msg 
 
 = form_for @user, :url => requested_user_or_self, :html => { :method => :put } do |f|
-  %p 
+  %p
     First Name:
     %br/
     = f.text_field :firstName, :size => 60
-  %p 
+  %p
     Last Name:
-    %br/ 
+    %br/
     = f.text_field :lastName, :size => 60
-  %p 
+  %p
     Email:
     %br/
     = f.text_field :email, :size => 60
+  %p
+    Select pantry
+    %br/
+    = f.select :organization_id, Organization.active.collect { |o| [o.name, o.id] }, :include_blank => true
 
   - submit_or_return_to authengine_users_path
 

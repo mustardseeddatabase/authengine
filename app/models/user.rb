@@ -2,6 +2,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
+  attr_accessible :organization_id
 
 # when user account is first created, only firstname, lastname and email are required
   validates_presence_of     :firstName, :lastName, :email
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :useractions, :dependent=>:delete_all
   has_many :actions, :through=>:useractions
 
+  has_many :households
   belongs_to :organization
 
   before_save :encrypt_password

@@ -20,6 +20,10 @@
       %td= f.text_field :email
 
     %tr
+      %td= f.label :user_organization_id, "Select pantry"
+      %td= f.select :organization_id, Organization.active.collect { |o| [o.name, o.id] }, :include_blank => true
+
+    %tr
       %td
         %label{:for => "role_id"} Database access role
       %td
