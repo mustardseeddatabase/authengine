@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :actions, :through=>:useractions
 
   has_many :households
+  has_many :clients
   belongs_to :organization
 
   before_save :encrypt_password
