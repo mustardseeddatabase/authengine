@@ -15,7 +15,7 @@ class Authengine::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
-      flash[:notice] = "Pantry saved"
+      flash[:notice] = "Organization saved"
       redirect_to authengine_organizations_path
     else
       render :action => :new
@@ -29,7 +29,7 @@ class Authengine::OrganizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:id])
     if @organization.update_attributes(params[:organization])
-      flash[:notice] = "Pantry updated"
+      flash[:notice] = "Organization updated"
       redirect_to authengine_organizations_path
     else
       render :action => :edit
@@ -39,7 +39,7 @@ class Authengine::OrganizationsController < ApplicationController
   def destroy
     @organization = Organization.find(params[:id])
     @organization.delete
-    flash[:notice] = "Pantry deleted"
+    flash[:notice] = "Organization deleted"
     redirect_to authengine_organizations_path
   end
 end
