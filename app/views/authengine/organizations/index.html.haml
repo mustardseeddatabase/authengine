@@ -1,7 +1,7 @@
 = message_block :on => :organization
-%h1 Manage pantries
+%h1 Manage pantries and referral agencies
 
-= link_to "Add pantry", new_authengine_organization_path
+= link_to "Add organization", new_authengine_organization_path
 
 %h2 Active organizations
 = render :partial => 'organizations',
@@ -10,3 +10,4 @@
 %h2 Inactive organizations
 = render :partial => 'organizations',
          :locals => {:organizations => @inactive_organizations, :name => 'inactive_organizations'}
+

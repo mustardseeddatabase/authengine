@@ -14,4 +14,5 @@
           -if organization.users.empty?
             = link_to "delete", authengine_organization_path(organization), :method => :delete, :confirm => 'are you sure?'
           -else
-            = link_to "delete", "javascript:void(0)", :onclick => "$(this).after('Can\\'t delete a pantry that already has users. De-activate instead')"
+            = link_to "delete", "javascript:void(0)", :onclick => "$(this).after('Can\\'t delete an organization that already has users. De-activate instead')"
+
