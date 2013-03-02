@@ -116,3 +116,4 @@ ActionController::RoutingError (No route matches [GET] "/jasmine"):
 
   Rendered /Users/lesnightingill/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
 Connecting to database specified by database.yml
+Connecting to database specified by database.yml

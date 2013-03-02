@@ -24,5 +24,11 @@
     %tr
       %td= f.label :active
       %td= f.check_box :active
+    %tr
+      %td= f.label :pantry
+      %td= f.check_box :pantry
+    %tr
+      %td= f.label :referrer, 'Referral agency'
+      %td= f.check_box :referrer
 
   - submit_or_return_to authengine_organizations_path

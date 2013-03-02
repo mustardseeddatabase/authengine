@@ -8,6 +8,14 @@ FactoryGirl.define  do
     phone  {Faker::PhoneNumber.phone_number}
     email  {Faker::Internet.email}
 
+    trait :pantry do
+      pantry true
+    end
+
+    trait :referrer do
+      referrer true
+    end
+
     trait :active do
       active true
     end
