@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def org_name
+    organization && organization.name
+  end
+
   def first_last_name
     firstName+' '+lastName
   end

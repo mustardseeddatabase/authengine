@@ -1,8 +1,10 @@
 class Organization < ActiveRecord::Base
   has_many :users
+  has_many :households
   validates :name, :presence => true
   scope :active, where('active = ?', true)
   scope :inactive, where('active = ?', false)
+  scope :pantries, where('pantry = ?', true)
 
   validate :either_pantry_or_referrer_must_be_true
 
