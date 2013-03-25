@@ -2,7 +2,6 @@
 require "date"
 
 class Authengine::SessionsController < ApplicationController
-  layout 'authengine/layouts/authengine'
 
   skip_before_filter :check_permissions, :only => [:new, :create, :destroy]
 

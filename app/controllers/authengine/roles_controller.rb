@@ -1,5 +1,4 @@
 class Authengine::RolesController < ApplicationController
-  layout 'authengine/layouts/authengine'
 
   def index
     @all_roles = Role.find(:all, :order =>:name)

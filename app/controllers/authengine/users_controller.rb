@@ -4,7 +4,6 @@
 # check_permissions filter, distinguishing between actions on one's own
 # model vs. actions on other users' models.
 class Authengine::UsersController < ApplicationController
-  layout 'authengine/layouts/authengine'
   #before_filter :not_logged_in_required, :only => [:new, :create]
   #before_filter :login_required, :only => [:show, :edit, :update]
   #before_filter :check_administrator_role, :only => [:index, :destroy, :enable]

@@ -1,5 +1,4 @@
 class Authengine::ActionsController < ApplicationController
-  layout 'authengine/layouts/authengine'
 
   def index
     Controller.update_table # make sure the actions table includes all current controllers/actions

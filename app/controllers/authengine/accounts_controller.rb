@@ -1,5 +1,4 @@
 class Authengine::AccountsController < ApplicationController
-  layout 'authengine/layouts/authengine'
 
   # because a user cannot login until the account is activated
   skip_before_filter :check_permissions, :only => [:show]
