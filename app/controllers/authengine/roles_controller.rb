@@ -1,7 +1,7 @@
 class Authengine::RolesController < ApplicationController
 
   def index
-    @all_roles = Role.find(:all, :order =>:name)
+    @all_roles = Role.order(:name).where("name != 'developer' ") # hide this role if it's there, it shouldn't be deleted
     @roles     = Role.equal_or_lower_than(current_user.roles)
   end
 
