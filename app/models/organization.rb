@@ -11,4 +11,8 @@ class Organization < ActiveRecord::Base
   def either_pantry_or_referrer_must_be_true
     errors[:base] << "Either pantry or referral agency, or both, must be checked" unless pantry || referrer
   end
+
+  def <=>(other)
+    name <=> other.name
+  end
 end

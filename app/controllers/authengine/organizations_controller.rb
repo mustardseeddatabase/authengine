@@ -4,8 +4,8 @@ class Authengine::OrganizationsController < ApplicationController
   end
 
   def index
-    @active_organizations = Organization.active
-    @inactive_organizations = Organization.inactive
+    @active_organizations = Organization.active.sort
+    @inactive_organizations = Organization.inactive.sort
   end
 
   def new
