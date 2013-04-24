@@ -16,15 +16,15 @@ ActiveRecord::Schema.define(:version => 20111003074700) do
   create_table "action_roles", :force => true do |t|
     t.integer  "role_id",    :limit => 8
     t.integer  "action_id",  :limit => 8
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "actions", :force => true do |t|
     t.string   "action_name"
     t.integer  "controller_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "actions", ["action_name"], :name => "index_actions_on_action_name"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20111003074700) do
   create_table "controllers", :force => true do |t|
     t.string   "controller_name"
     t.datetime "last_modified"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "controllers", ["controller_name"], :name => "index_controllers_on_controller_name"
@@ -41,17 +41,17 @@ ActiveRecord::Schema.define(:version => 20111003074700) do
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "short_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "parent_id"
   end
 
   create_table "user_roles", :force => true do |t|
-    t.integer  "role_id",    :limit => 8, :null => false
-    t.integer  "user_id",    :limit => 8, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type"
+    t.integer  "role_id",    :limit => 8,                                   :null => false
+    t.integer  "user_id",    :limit => 8,                                   :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.string   "type",                    :default => "PersistentUserRole"
   end
 
   create_table "useractions", :force => true do |t|
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20111003074700) do
     t.integer  "action_id"
     t.string   "type"
     t.text     "params"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20111003074700) do
     t.string   "lastName"
     t.string   "type"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login"
