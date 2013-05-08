@@ -65,6 +65,17 @@ class User < ActiveRecord::Base
     firstName+' '+lastName
   end
 
+  def initials
+    first_initial + last_initial
+  end
+
+  def first_initial
+    firstName[0].upcase
+  end
+
+  def last_initial
+    lastName[0].upcase
+  end
 
   # Finds the user with the corresponding activation code, activates their account and returns the user.
   #

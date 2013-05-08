@@ -14,3 +14,7 @@ describe "when a new user is added" do
   end
 end
 
+describe "#initials method" do
+  subject{ FactoryGirl.create(:user, :firstName => 'frank', :lastName => 'Herbert') }
+  its(:initials){ should == 'FH' }
+end
