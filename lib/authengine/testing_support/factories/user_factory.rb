@@ -8,6 +8,8 @@ FactoryGirl.define do
     enabled 1
     firstName {Faker::Name.first_name}
     lastName {Faker::Name.last_name}
+
+    association :organization, strategy: :build
   end
 end
 
