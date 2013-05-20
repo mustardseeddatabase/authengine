@@ -26,7 +26,7 @@ FactoryGirl.define  do
 
     trait :with_users do
       after(:build) do |o|
-        o.users << FactoryGirl.build(:user)
+        o.users << FactoryGirl.build(:user, :organization_id => o.id)
       end
     end
   end
