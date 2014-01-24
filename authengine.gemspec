@@ -1,46 +1,71 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "authengine/version"
+# stub: authengine 0.0.2 ruby lib
 
 Gem::Specification.new do |s|
-  s.name        = "authengine"
-  s.version     = Authengine::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Les Nightingill"]
-  s.email       = ["codehacker@comcast.net"]
-  s.homepage    = ""
-  s.summary     = %q{Unobtrusive authentication and authorization engine}
-  s.description = %q{A rails authentication and authorization engine that
-                    reduces clutter in your controllers and views.
-                    Includes aliased link_to and button_to helpers that return an empty string
-                    if the current user is not permitted to follow the link.
-                    Authorization configuration is removed from the controllers and instead
-                    is stored in the database and configured through html views.}
+  s.name = "authengine"
+  s.version = "0.0.2"
 
-  s.rubyforge_project = "authengine"
-
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.authors = ["Les Nightingill"]
+  s.date = "2014-01-13"
+  s.description = "A rails authentication and authorization engine that\n                    reduces clutter in your controllers and views.\n                    Includes aliased link_to and button_to helpers that return an empty string\n                    if the current user is not permitted to follow the link.\n                    Authorization configuration is removed from the controllers and instead\n                    is stored in the database and configured through html views."
+  s.email = ["codehacker@comcast.net"]
+  s.files = [".gitignore", ".rspec", "Gemfile", "README.md", "Rakefile", "app/assets/images/message_block/back.gif", "app/assets/images/message_block/back_m.gif", "app/assets/images/message_block/confirmation.gif", "app/assets/images/message_block/confirmation_m.gif", "app/assets/images/message_block/error.gif", "app/assets/images/message_block/error_m.gif", "app/assets/images/message_block/info.gif", "app/assets/images/message_block/info_m.gif", "app/assets/images/message_block/notice.gif", "app/assets/images/message_block/notice_m.gif", "app/assets/images/message_block/warn.gif", "app/assets/images/message_block/warn_m.gif", "app/assets/stylesheets/authengine.css", "app/assets/stylesheets/message_block.css", "app/controllers/authengine/accounts_controller.rb", "app/controllers/authengine/action_roles_controller.rb", "app/controllers/authengine/actions_controller.rb", "app/controllers/authengine/organizations_controller.rb", "app/controllers/authengine/roles_controller.rb", "app/controllers/authengine/sessions_controller.rb", "app/controllers/authengine/user_roles_controller.rb", "app/controllers/authengine/useractions_controller.rb", "app/controllers/authengine/users_controller.rb", "app/helpers/application_helper.rb", "app/helpers/authengine/users_helper.rb", "app/mailers/authengine/user_mailer.rb", "app/models/action.rb", "app/models/action_role.rb", "app/models/authenticated_system.rb", "app/models/authorized_system.rb", "app/models/controller.rb", "app/models/organization.rb", "app/models/role.rb", "app/models/session.rb", "app/models/session_role.rb", "app/models/state.rb", "app/models/user.rb", "app/models/user_observer.rb", "app/models/user_role.rb", "app/models/useraction.rb", "app/views/authengine/accounts/edit.html.erb", "app/views/authengine/actions/create.html.erb", "app/views/authengine/actions/destroy.html.erb", "app/views/authengine/actions/edit.html.erb", "app/views/authengine/actions/index.html.haml", "app/views/authengine/actions/new.html.erb", "app/views/authengine/actions/show.html.erb", "app/views/authengine/actions/update.html.erb", "app/views/authengine/admin/_show.html.haml", "app/views/authengine/organizations/_organization_form.html.haml", "app/views/authengine/organizations/_organizations.html.haml", "app/views/authengine/organizations/edit.html.haml", "app/views/authengine/organizations/index.html.haml", "app/views/authengine/organizations/new.html.haml", "app/views/authengine/organizations/show.html.haml", "app/views/authengine/roles/index.html.haml", "app/views/authengine/roles/new.html.haml", "app/views/authengine/roles/show.html.erb", "app/views/authengine/sessions/new.html.haml", "app/views/authengine/user_mailer/activation.html.erb", "app/views/authengine/user_mailer/forgot_password.html.erb", "app/views/authengine/user_mailer/message_to_admin.html.erb", "app/views/authengine/user_mailer/reset_password.html.erb", "app/views/authengine/user_mailer/signup_notification.html.erb", "app/views/authengine/user_roles/edit.html.haml", "app/views/authengine/user_roles/index.html.haml", "app/views/authengine/user_roles/new.html.haml", "app/views/authengine/useractions/_useraction.html.erb", "app/views/authengine/useractions/index.html.erb", "app/views/authengine/useractions/show.html.haml", "app/views/authengine/useractions/update.html.erb", "app/views/authengine/users/_no_privacy_policy.html.haml", "app/views/authengine/users/_privacy_policy_example.html.haml", "app/views/authengine/users/_user.html.haml", "app/views/authengine/users/edit.html.haml", "app/views/authengine/users/index.html.haml", "app/views/authengine/users/new.html.haml", "app/views/authengine/users/show.html.haml", "app/views/authengine/users/signup.html.haml", "authengine.gemspec", "config/application.rb", "config/routes.rb", "db/migrate/20110320171029_create_authengine_tables.rb", "db/migrate/20110924165900_add_parent_id_to_roles_table.rb", "db/migrate/20110925202800_add_type_field_to_user_roles_table.rb", "db/migrate/20111003074700_add_indexes_to_several_tables.rb", "db/migrate/20121107161700_add_organizations_table.rb", "db/migrate/20121107162300_add_organization_id_to_users_table.rb", "db/migrate/20130429213400_remove_type_field_from_user_roles_table.rb", "db/seeds.rb", "lib/application_helper.rb", "lib/authengine.rb", "lib/authengine/engine.rb", "lib/authengine/testing_support/factories/organization_factory.rb", "lib/authengine/testing_support/factories/user_factory.rb", "lib/authengine/version.rb", "lib/rails/generators/authengine/authengine_generator.rb", "lib/rails/generators/authengine/templates/initializer.rb", "lib/rails/generators/authengine/templates/migration.rb", "lib/rails/generators/authengine/templates/pre_populate_database.rb", "lib/rails/generators/authengine/templates/schema.rb", "lib/tasks/bootstrap.rake", "spec/authengine_spec.rb", "spec/dummy/.rspec", "spec/dummy/Gemfile", "spec/dummy/Rakefile", "spec/dummy/app/assets/javascripts/jasmine_examples/Player.js", "spec/dummy/app/assets/javascripts/jasmine_examples/Song.js", "spec/dummy/app/controllers/application_controller.rb", "spec/dummy/app/helpers/application_helper.rb", "spec/dummy/app/views/layouts/application.html.erb", "spec/dummy/config.ru", "spec/dummy/config/application.rb", "spec/dummy/config/boot.rb", "spec/dummy/config/database.yml", "spec/dummy/config/environment.rb", "spec/dummy/config/environments/development.rb", "spec/dummy/config/environments/production.rb", "spec/dummy/config/environments/test.rb", "spec/dummy/config/initializers/application.rb", "spec/dummy/config/initializers/backtrace_silencers.rb", "spec/dummy/config/initializers/inflections.rb", "spec/dummy/config/initializers/mime_types.rb", "spec/dummy/config/initializers/secret_token.rb", "spec/dummy/config/initializers/session_store.rb", "spec/dummy/config/locales/en.yml", "spec/dummy/config/routes.rb", "spec/dummy/db/development.sqlite3", "spec/dummy/db/migrate/20121108140828_create_authengine_tables.authengine_engine.rb", "spec/dummy/db/migrate/20121108140829_add_parent_id_to_roles_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140830_add_type_field_to_user_roles_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140831_add_indexes_to_several_tables.authengine_engine.rb", "spec/dummy/db/migrate/20121108140832_add_organizations_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140833_add_organization_id_to_users_table.authengine_engine.rb", "spec/dummy/db/migrate/20130302000835_add_pantry_and_referrer_fields_to_organizations_table.rb", "spec/dummy/db/migrate/20130430043717_remove_type_field_from_user_roles_table.authengine_engine.rb", "spec/dummy/db/schema.rb", "spec/dummy/lib/constants.rb", "spec/dummy/log/development.log", "spec/dummy/log/production.log", "spec/dummy/log/server.log", "spec/dummy/public/404.html", "spec/dummy/public/422.html", "spec/dummy/public/500.html", "spec/dummy/public/favicon.ico", "spec/dummy/public/javascripts/application.js", "spec/dummy/public/javascripts/controls.js", "spec/dummy/public/javascripts/dragdrop.js", "spec/dummy/public/javascripts/effects.js", "spec/dummy/public/javascripts/prototype.js", "spec/dummy/public/javascripts/rails.js", "spec/dummy/public/stylesheets/.gitkeep", "spec/dummy/script/rails", "spec/dummy/spec/javascripts/helpers/.gitkeep", "spec/dummy/spec/javascripts/helpers/SpecHelper.js", "spec/dummy/spec/javascripts/jasmine_examples/PlayerSpec.js", "spec/dummy/spec/javascripts/support/jasmine.yml", "spec/generators/authengine_generator_spec.rb", "spec/integration/navigation_spec.rb", "spec/javascripts/spec.css", "spec/javascripts/spec.js.coffee", "spec/models/action_role_spec.rb", "spec/models/authenticated_system_spec.rb", "spec/models/organization_spec.rb", "spec/models/role_spec.rb", "spec/models/user_factory_spec.rb", "spec/models/user_spec.rb", "spec/requests/sessions_spec.rb", "spec/spec_helper.rb"]
+  s.homepage = ""
   s.require_paths = ["lib"]
+  s.rubyforge_project = "authengine"
+  s.rubygems_version = "2.1.11"
+  s.summary = "Unobtrusive authentication and authorization engine"
+  s.test_files = ["spec/authengine_spec.rb", "spec/dummy/.rspec", "spec/dummy/Gemfile", "spec/dummy/Rakefile", "spec/dummy/app/assets/javascripts/jasmine_examples/Player.js", "spec/dummy/app/assets/javascripts/jasmine_examples/Song.js", "spec/dummy/app/controllers/application_controller.rb", "spec/dummy/app/helpers/application_helper.rb", "spec/dummy/app/views/layouts/application.html.erb", "spec/dummy/config.ru", "spec/dummy/config/application.rb", "spec/dummy/config/boot.rb", "spec/dummy/config/database.yml", "spec/dummy/config/environment.rb", "spec/dummy/config/environments/development.rb", "spec/dummy/config/environments/production.rb", "spec/dummy/config/environments/test.rb", "spec/dummy/config/initializers/application.rb", "spec/dummy/config/initializers/backtrace_silencers.rb", "spec/dummy/config/initializers/inflections.rb", "spec/dummy/config/initializers/mime_types.rb", "spec/dummy/config/initializers/secret_token.rb", "spec/dummy/config/initializers/session_store.rb", "spec/dummy/config/locales/en.yml", "spec/dummy/config/routes.rb", "spec/dummy/db/development.sqlite3", "spec/dummy/db/migrate/20121108140828_create_authengine_tables.authengine_engine.rb", "spec/dummy/db/migrate/20121108140829_add_parent_id_to_roles_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140830_add_type_field_to_user_roles_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140831_add_indexes_to_several_tables.authengine_engine.rb", "spec/dummy/db/migrate/20121108140832_add_organizations_table.authengine_engine.rb", "spec/dummy/db/migrate/20121108140833_add_organization_id_to_users_table.authengine_engine.rb", "spec/dummy/db/migrate/20130302000835_add_pantry_and_referrer_fields_to_organizations_table.rb", "spec/dummy/db/migrate/20130430043717_remove_type_field_from_user_roles_table.authengine_engine.rb", "spec/dummy/db/schema.rb", "spec/dummy/lib/constants.rb", "spec/dummy/log/development.log", "spec/dummy/log/production.log", "spec/dummy/log/server.log", "spec/dummy/public/404.html", "spec/dummy/public/422.html", "spec/dummy/public/500.html", "spec/dummy/public/favicon.ico", "spec/dummy/public/javascripts/application.js", "spec/dummy/public/javascripts/controls.js", "spec/dummy/public/javascripts/dragdrop.js", "spec/dummy/public/javascripts/effects.js", "spec/dummy/public/javascripts/prototype.js", "spec/dummy/public/javascripts/rails.js", "spec/dummy/public/stylesheets/.gitkeep", "spec/dummy/script/rails", "spec/dummy/spec/javascripts/helpers/.gitkeep", "spec/dummy/spec/javascripts/helpers/SpecHelper.js", "spec/dummy/spec/javascripts/jasmine_examples/PlayerSpec.js", "spec/dummy/spec/javascripts/support/jasmine.yml", "spec/generators/authengine_generator_spec.rb", "spec/integration/navigation_spec.rb", "spec/javascripts/spec.css", "spec/javascripts/spec.js.coffee", "spec/models/action_role_spec.rb", "spec/models/authenticated_system_spec.rb", "spec/models/organization_spec.rb", "spec/models/role_spec.rb", "spec/models/user_factory_spec.rb", "spec/models/user_spec.rb", "spec/requests/sessions_spec.rb", "spec/spec_helper.rb"]
 
-  # one would think that these were development dependencies,
-  # but they are only installed when calling bundle from the
-  # host application if they are runtime dependencies! (bug?
-  # or misunderstanding?)
-  s.add_dependency 'rspec', '>= 2.0.0'
-  s.add_dependency 'rails', '~>3.2.5'
-  s.add_dependency 'sqlite3-ruby'
-  s.add_dependency 'capybara'
-  s.add_dependency 'rspec-rails', ">= 2.0.0"
-  s.add_dependency 'flexmock'
-  s.add_dependency 'faker'
-  s.add_dependency 'message_block'
-  s.add_dependency 'haml'
-  s.add_dependency 'factory_girl_rails'
-  s.add_dependency 'database_cleaner'
-  s.add_dependency 'jasmine'
-  s.add_dependency 'jasminerice'
-  s.add_dependency 'debugger'
-  #s.add_dependency 'ruby-debug19'
+  if s.respond_to? :specification_version then
+    s.specification_version = 4
+
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_runtime_dependency(%q<rails>, ["~> 3.2.5"])
+      s.add_runtime_dependency(%q<sqlite3-ruby>, [">= 0"])
+      s.add_runtime_dependency(%q<capybara>, [">= 0"])
+      s.add_runtime_dependency(%q<rspec-rails>, [">= 2.0.0"])
+      s.add_runtime_dependency(%q<flexmock>, [">= 0"])
+      s.add_runtime_dependency(%q<faker>, [">= 0"])
+      s.add_runtime_dependency(%q<message_block>, [">= 0"])
+      s.add_runtime_dependency(%q<haml>, [">= 0"])
+      s.add_runtime_dependency(%q<factory_girl_rails>, [">= 0"])
+      s.add_runtime_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_runtime_dependency(%q<jasmine>, [">= 0"])
+      s.add_runtime_dependency(%q<jasminerice>, [">= 0"])
+      s.add_runtime_dependency(%q<debugger>, [">= 0"])
+    else
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_dependency(%q<rails>, ["~> 3.2.5"])
+      s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
+      s.add_dependency(%q<capybara>, [">= 0"])
+      s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
+      s.add_dependency(%q<flexmock>, [">= 0"])
+      s.add_dependency(%q<faker>, [">= 0"])
+      s.add_dependency(%q<message_block>, [">= 0"])
+      s.add_dependency(%q<haml>, [">= 0"])
+      s.add_dependency(%q<factory_girl_rails>, [">= 0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<jasmine>, [">= 0"])
+      s.add_dependency(%q<jasminerice>, [">= 0"])
+      s.add_dependency(%q<debugger>, [">= 0"])
+    end
+  else
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
+    s.add_dependency(%q<rails>, ["~> 3.2.5"])
+    s.add_dependency(%q<sqlite3-ruby>, [">= 0"])
+    s.add_dependency(%q<capybara>, [">= 0"])
+    s.add_dependency(%q<rspec-rails>, [">= 2.0.0"])
+    s.add_dependency(%q<flexmock>, [">= 0"])
+    s.add_dependency(%q<faker>, [">= 0"])
+    s.add_dependency(%q<message_block>, [">= 0"])
+    s.add_dependency(%q<haml>, [">= 0"])
+    s.add_dependency(%q<factory_girl_rails>, [">= 0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<jasmine>, [">= 0"])
+    s.add_dependency(%q<jasminerice>, [">= 0"])
+    s.add_dependency(%q<debugger>, [">= 0"])
+  end
 end
