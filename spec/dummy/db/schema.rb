@@ -62,10 +62,11 @@ ActiveRecord::Schema.define(:version => 20130430043717) do
   end
 
   create_table "user_roles", :force => true do |t|
-    t.integer  "role_id",    :limit => 8, :null => false
-    t.integer  "user_id",    :limit => 8, :null => false
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.integer  "role_id",    :limit => 8,                                   :null => false
+    t.integer  "user_id",    :limit => 8,                                   :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.string   "type",                    :default => "PersistentUserRole"
   end
 
   create_table "useractions", :force => true do |t|
